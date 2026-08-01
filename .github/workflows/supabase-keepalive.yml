@@ -1,0 +1,19 @@
+name: Supabase Keepalive
+
+# Ping l'API REST Supabase pour éviter que le projet gratuit se mette en
+# pause automatiquement après ~2 semaines d'inactivité. Filet de sécurité
+# en complément de la routine cloud Claude qui fait le même ping tous les
+# 3 jours (au cas où l'une des deux tombe en panne silencieusement).
+on:
+  schedule:
+    - cron: '0 8 * * 0' # tous les dimanches à 08:00 UTC
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping Supabase REST API
+        run: |
+          curl -sf "https://dqxaxgvncoxgwfzumvfg.supabase.co/rest/v1/" \
+            -H "apikey: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImRxeGF4Z3ZuY294Z3dmenVtdmZnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzA0NjA1MDksImV4cCI6MjA4NjAzNjUwOX0.HuicCQPb7ekYOJspvoIbrliN4w9c2OMGTOj63rlZ7h0"
