@@ -13,7 +13,7 @@ Demarre Docker Desktop automatiquement si besoin (requis par `supabase db dump`)
 $ErrorActionPreference = "Stop"
 
 $repoRoot      = Split-Path -Parent $PSScriptRoot
-$backupRoot    = "C:\Users\b-tho\Desktop\Projets\HistoryVoice\HistoryVoice Info\Backups DB"
+$backupRoot    = Join-Path $repoRoot "backups"
 $date          = Get-Date -Format "yyyy-MM-dd"
 $workDir       = Join-Path $env:TEMP "historyvoice-backup-$date"
 $zipFile       = Join-Path $backupRoot "historyvoice-backup-$date.zip"

@@ -71,6 +71,9 @@ yarn-error.log
 .env
 !.env.example
 
+# Backups Supabase (donnees utilisateurs, jamais sur Git)
+/backups/
+
 # Claude Code / AI assistant local files
 .claude/
 CLAUDE.md
