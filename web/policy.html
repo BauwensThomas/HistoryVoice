@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>History Voice - Politique de confidentialité</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: #CECCDE; color: #2D2348; line-height: 1.6;
+    }
+    .container { max-width: 720px; margin: 0 auto; padding: 40px 24px 60px; }
+    h1 { font-size: 28px; font-weight: 900; text-align: center; margin-bottom: 4px; }
+    .last-updated { text-align: center; font-size: 13px; color: #6B6B8D; margin-bottom: 32px; }
+    .section { background: rgba(255,255,255,0.5); border-radius: 12px; padding: 20px 24px; margin-bottom: 16px; }
+    .section h2 { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: #2D2348; }
+    .section p  { font-size: 14px; color: #4A3B75; white-space: pre-line; }
+    .section a  { color: #2196F3; text-decoration: underline; }
+    .footer { text-align: center; margin-top: 40px; font-size: 12px; color: #6B6B8D; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1 id="t-title"></h1>
+    <p class="last-updated" id="t-updated"></p>
+
+    <div class="section"><h2 id="t-s1h"></h2><p id="t-s1p"></p></div>
+    <div class="section"><h2 id="t-s2h"></h2><p id="t-s2p"></p></div>
+    <div class="section"><h2 id="t-s3h"></h2><p id="t-s3p"></p></div>
+    <div class="section"><h2 id="t-s4h"></h2><p id="t-s4p"></p></div>
+    <div class="section"><h2 id="t-s5h"></h2><p id="t-s5p"></p></div>
+    <div class="section"><h2 id="t-s6h"></h2><p id="t-s6p"></p></div>
+    <div class="section"><h2 id="t-s7h"></h2><p id="t-s7p"></p></div>
+    <div class="section"><h2 id="t-s8h"></h2><p id="t-s8p"></p></div>
+
+    <div class="footer"><p id="t-footer"></p></div>
+  </div>
+
+  <script>
+  const YEAR = new Date().getFullYear();
+
+  const T = {
+    fr: {
+      title:   "Politique de confidentialité",
+      updated: "Dernière mise à jour : 1er août 2026",
+      s1h: "1. Introduction",
+      s1p: "BelgaCai édite l'application History Voice, un générateur d'histoires personnalisées pour enfants et adultes. Cette politique explique quelles données nous collectons, comment nous les utilisons et quels sont vos droits.",
+      s2h: "2. Données collectées",
+      s2p: "Nous collectons les données suivantes :\n- Adresse email (via la connexion Google)\n- Solde de crédits (temps de génération restant)\n- Identifiant publicitaire, si vous n'êtes pas abonné premium (pour l'affichage de publicités non personnalisées)\n\nNous ne collectons PAS :\n- Le contenu des histoires générées\n- Les paramètres de génération (âge, genre, etc.)\n- La localisation\n- Les contacts ou photos",
+      s3h: "3. Utilisation des données",
+      s3p: "Vos données sont utilisées uniquement pour :\n- Vous authentifier et gérer votre compte\n- Suivre votre solde de crédits\n- Générer des histoires selon vos paramètres\n- Traiter vos achats de crédits",
+      s4h: "4. Services tiers",
+      s4p: "L'application fait appel à des services tiers spécialisés pour :\n- L'authentification des utilisateurs\n- La génération vocale des histoires\n- La génération de texte par intelligence artificielle\n- La gestion des achats intégrés\n- Le stockage sécurisé des données\n- L'affichage de publicités non personnalisées, pour les utilisateurs non premium (Google AdMob)\n\nCes prestataires traitent vos données dans le strict cadre de leurs missions et disposent chacun de leur propre politique de confidentialité. Si vous résidez dans l'Espace économique européen, au Royaume-Uni ou en Suisse, un formulaire de consentement vous est présenté avant tout affichage de publicité.",
+      s5h: "5. Stockage et sécurité",
+      s5p: "Vos données sont stockées de manière sécurisée sur des serveurs hébergés en Europe. Les communications sont chiffrées via HTTPS. Nous ne vendons ni ne partageons vos données personnelles avec des tiers à des fins commerciales.",
+      s6h: "6. Vos droits",
+      s6p: "Conformément au RGPD, vous pouvez :\n- Accéder à vos données personnelles\n- Demander la correction de vos données\n- Demander la suppression de votre compte et de vos données",
+      s7h: "7. Public familial",
+      s7p: "History Voice est destiné à un usage familial. Les enfants doivent utiliser l'application sous la supervision d'un parent ou tuteur. Nous ne collectons pas sciemment de données personnelles d'enfants de moins de 13 ans sans le consentement parental.",
+      s8h: "8. Contact",
+      s8p: "Pour toute question relative à cette politique de confidentialité :\n\nHistory Voice - BelgaCai\nEmail : historyvoice@belgacai.com",
+      s8email: "historyvoice@belgacai.com",
+      footer: `© Copyright ${YEAR} - History Voice par BelgaCai`,
+      page_title: "History Voice - Politique de confidentialité",
+    },
+    en: {
+      title:   "Privacy Policy",
+      updated: "Last updated: August 1, 2026",
+      s1h: "1. Introduction",
+      s1p: "BelgaCai publishes History Voice, a personalised story generator for children and adults. This policy explains what data we collect, how we use it, and what your rights are.",
+      s2h: "2. Data collected",
+      s2p: "We collect the following data:\n- Email address (via Google Sign-In)\n- Credit balance (remaining generation time)\n- Advertising identifier, if you are not a premium subscriber (used to display non-personalised ads)\n\nWe do NOT collect:\n- The content of generated stories\n- Generation parameters (age, gender, etc.)\n- Location\n- Contacts or photos",
+      s3h: "3. Use of data",
+      s3p: "Your data is used solely to:\n- Authenticate you and manage your account\n- Track your credit balance\n- Generate stories based on your parameters\n- Process your credit purchases",
+      s4h: "4. Third-party services",
+      s4p: "The application uses specialised third-party services for:\n- User authentication\n- Voice generation of stories\n- AI text generation\n- In-app purchase management\n- Secure data storage\n- Displaying non-personalised ads to non-premium users (Google AdMob)\n\nThese providers process your data solely within the scope of their services and each has its own privacy policy. If you are located in the European Economic Area, the UK, or Switzerland, a consent form is shown before any ads are displayed.",
+      s5h: "5. Storage and security",
+      s5p: "Your data is stored securely on servers hosted in Europe. Communications are encrypted via HTTPS. We do not sell or share your personal data with third parties for commercial purposes.",
+      s6h: "6. Your rights",
+      s6p: "In accordance with GDPR, you may:\n- Access your personal data\n- Request correction of your data\n- Request deletion of your account and data",
+      s7h: "7. Family audience",
+      s7p: "History Voice is intended for family use. Children must use the app under the supervision of a parent or guardian. We do not knowingly collect personal data from children under 13 without parental consent.",
+      s8h: "8. Contact",
+      s8p: "For any questions about this privacy policy:\n\nHistory Voice - BelgaCai\nEmail: historyvoice@belgacai.com",
+      s8email: "historyvoice@belgacai.com",
+      footer: `© Copyright ${YEAR} - History Voice by BelgaCai`,
+      page_title: "History Voice - Privacy Policy",
+    },
+    es: {
+      title:   "Política de privacidad",
+      updated: "Última actualización: 1 de agosto de 2026",
+      s1h: "1. Introducción",
+      s1p: "BelgaCai publica History Voice, un generador de cuentos personalizados para niños y adultos. Esta política explica qué datos recopilamos, cómo los usamos y cuáles son sus derechos.",
+      s2h: "2. Datos recopilados",
+      s2p: "Recopilamos los siguientes datos:\n- Dirección de email (a través de Google Sign-In)\n- Saldo de créditos (tiempo de generación restante)\n- Identificador publicitario, si no eres usuario premium (para mostrar anuncios no personalizados)\n\nNO recopilamos:\n- El contenido de los cuentos generados\n- Los parámetros de generación (edad, género, etc.)\n- La ubicación\n- Contactos o fotos",
+      s3h: "3. Uso de los datos",
+      s3p: "Sus datos se utilizan únicamente para:\n- Autenticarle y gestionar su cuenta\n- Seguir su saldo de créditos\n- Generar cuentos según sus parámetros\n- Procesar sus compras de créditos",
+      s4h: "4. Servicios de terceros",
+      s4p: "La aplicación utiliza servicios especializados de terceros para:\n- La autenticación de usuarios\n- La generación de voz de los cuentos\n- La generación de texto por IA\n- La gestión de compras en la app\n- El almacenamiento seguro de datos\n- La visualización de anuncios no personalizados para usuarios no premium (Google AdMob)\n\nEstos proveedores tratan sus datos estrictamente en el marco de sus funciones y cada uno dispone de su propia política de privacidad. Si reside en el Espacio Económico Europeo, el Reino Unido o Suiza, se le mostrará un formulario de consentimiento antes de mostrar cualquier anuncio.",
+      s5h: "5. Almacenamiento y seguridad",
+      s5p: "Sus datos se almacenan de forma segura en servidores alojados en Europa. Las comunicaciones están cifradas mediante HTTPS. No vendemos ni compartimos sus datos personales con terceros con fines comerciales.",
+      s6h: "6. Sus derechos",
+      s6p: "De acuerdo con el RGPD, usted puede:\n- Acceder a sus datos personales\n- Solicitar la corrección de sus datos\n- Solicitar la eliminación de su cuenta y sus datos",
+      s7h: "7. Público familiar",
+      s7p: "History Voice está destinado al uso familiar. Los niños deben usar la aplicación bajo la supervisión de un padre o tutor. No recopilamos conscientemente datos personales de niños menores de 13 años sin el consentimiento de los padres.",
+      s8h: "8. Contacto",
+      s8p: "Para cualquier pregunta sobre esta política de privacidad:\n\nHistory Voice - BelgaCai\nEmail: historyvoice@belgacai.com",
+      s8email: "historyvoice@belgacai.com",
+      footer: `© Copyright ${YEAR} - History Voice por BelgaCai`,
+      page_title: "History Voice - Política de privacidad",
+    },
+    pt: {
+      title:   "Política de privacidade",
+      updated: "Última atualização: 1 de agosto de 2026",
+      s1h: "1. Introdução",
+      s1p: "A BelgaCai publica History Voice, um gerador de histórias personalizadas para crianças e adultos. Esta política explica quais dados coletamos, como os usamos e quais são os seus direitos.",
+      s2h: "2. Dados coletados",
+      s2p: "Coletamos os seguintes dados:\n- Endereço de email (via Google Sign-In)\n- Saldo de créditos (tempo de geração restante)\n- Identificador de publicidade, caso você não seja assinante premium (para exibir anúncios não personalizados)\n\nNÃO coletamos:\n- O conteúdo das histórias geradas\n- Os parâmetros de geração (idade, gênero, etc.)\n- A localização\n- Contatos ou fotos",
+      s3h: "3. Uso dos dados",
+      s3p: "Seus dados são usados exclusivamente para:\n- Autenticá-lo e gerenciar sua conta\n- Acompanhar seu saldo de créditos\n- Gerar histórias de acordo com seus parâmetros\n- Processar suas compras de créditos",
+      s4h: "4. Serviços de terceiros",
+      s4p: "O aplicativo utiliza serviços especializados de terceiros para:\n- Autenticação de usuários\n- Geração de voz das histórias\n- Geração de texto por IA\n- Gerenciamento de compras no app\n- Armazenamento seguro de dados\n- Exibição de anúncios não personalizados para usuários não premium (Google AdMob)\n\nEsses prestadores tratam seus dados estritamente no âmbito de suas funções e cada um possui sua própria política de privacidade. Se você estiver no Espaço Econômico Europeu, no Reino Unido ou na Suíça, um formulário de consentimento será exibido antes da exibição de qualquer anúncio.",
+      s5h: "5. Armazenamento e segurança",
+      s5p: "Seus dados são armazenados com segurança em servidores hospedados na Europa. As comunicações são criptografadas via HTTPS. Não vendemos nem compartilhamos seus dados pessoais com terceiros para fins comerciais.",
+      s6h: "6. Seus direitos",
+      s6p: "De acordo com o RGPD, você pode:\n- Acessar seus dados pessoais\n- Solicitar a correção dos seus dados\n- Solicitar a exclusão da sua conta e dos seus dados",
+      s7h: "7. Público familiar",
+      s7p: "History Voice é destinado ao uso familiar. As crianças devem usar o aplicativo sob a supervisão de um pai ou responsável. Não coletamos conscientemente dados pessoais de crianças menores de 13 anos sem o consentimento dos pais.",
+      s8h: "8. Contato",
+      s8p: "Para qualquer dúvida sobre esta política de privacidade:\n\nHistory Voice - BelgaCai\nEmail: historyvoice@belgacai.com",
+      s8email: "historyvoice@belgacai.com",
+      footer: `© Copyright ${YEAR} - History Voice por BelgaCai`,
+      page_title: "History Voice - Política de privacidade",
+    },
+    it: {
+      title:   "Informativa sulla privacy",
+      updated: "Ultimo aggiornamento: 1 agosto 2026",
+      s1h: "1. Introduzione",
+      s1p: "BelgaCai pubblica History Voice, un generatore di storie personalizzate per bambini e adulti. Questa informativa spiega quali dati raccogliamo, come li utilizziamo e quali sono i tuoi diritti.",
+      s2h: "2. Dati raccolti",
+      s2p: "Raccogliamo i seguenti dati:\n- Indirizzo email (tramite Google Sign-In)\n- Saldo crediti (tempo di generazione rimanente)\n- Identificativo pubblicitario, se non sei un utente premium (per la visualizzazione di annunci non personalizzati)\n\nNON raccogliamo:\n- Il contenuto delle storie generate\n- I parametri di generazione (età, sesso, ecc.)\n- La posizione\n- Contatti o foto",
+      s3h: "3. Utilizzo dei dati",
+      s3p: "I tuoi dati vengono utilizzati esclusivamente per:\n- Autenticarti e gestire il tuo account\n- Monitorare il tuo saldo crediti\n- Generare storie in base ai tuoi parametri\n- Elaborare i tuoi acquisti di crediti",
+      s4h: "4. Servizi di terze parti",
+      s4p: "L'applicazione si avvale di servizi specializzati di terze parti per:\n- L'autenticazione degli utenti\n- La generazione vocale delle storie\n- La generazione di testo tramite IA\n- La gestione degli acquisti in-app\n- L'archiviazione sicura dei dati\n- La visualizzazione di annunci non personalizzati per gli utenti non premium (Google AdMob)\n\nQuesti fornitori trattano i tuoi dati esclusivamente nell'ambito delle loro funzioni e ciascuno dispone della propria informativa sulla privacy. Se ti trovi nello Spazio Economico Europeo, nel Regno Unito o in Svizzera, ti verrà mostrato un modulo di consenso prima della visualizzazione di qualsiasi annuncio.",
+      s5h: "5. Archiviazione e sicurezza",
+      s5p: "I tuoi dati sono archiviati in modo sicuro su server ospitati in Europa. Le comunicazioni sono crittografate tramite HTTPS. Non vendiamo né condividiamo i tuoi dati personali con terze parti per scopi commerciali.",
+      s6h: "6. I tuoi diritti",
+      s6p: "In conformità con il GDPR, puoi:\n- Accedere ai tuoi dati personali\n- Richiedere la correzione dei tuoi dati\n- Richiedere la cancellazione del tuo account e dei tuoi dati",
+      s7h: "7. Pubblico familiare",
+      s7p: "History Voice è destinato all'uso familiare. I bambini devono utilizzare l'app sotto la supervisione di un genitore o tutore. Non raccogliamo consapevolmente dati personali di bambini sotto i 13 anni senza il consenso dei genitori.",
+      s8h: "8. Contatto",
+      s8p: "Per qualsiasi domanda relativa a questa informativa sulla privacy:\n\nHistory Voice - BelgaCai\nEmail: historyvoice@belgacai.com",
+      s8email: "historyvoice@belgacai.com",
+      footer: `© Copyright ${YEAR} - History Voice di BelgaCai`,
+      page_title: "History Voice - Informativa sulla privacy",
+    },
+    nl: {
+      title:   "Privacybeleid",
+      updated: "Laatst bijgewerkt: 1 augustus 2026",
+      s1h: "1. Inleiding",
+      s1p: "BelgaCai publiceert History Voice, een gepersonaliseerde verhalengenerator voor kinderen en volwassenen. Dit beleid legt uit welke gegevens we verzamelen, hoe we ze gebruiken en wat uw rechten zijn.",
+      s2h: "2. Verzamelde gegevens",
+      s2p: "We verzamelen de volgende gegevens:\n- E-mailadres (via Google Sign-In)\n- Kreditsaldo (resterende generatietijd)\n- Advertentie-ID, indien u geen premiumgebruiker bent (voor het weergeven van niet-gepersonaliseerde advertenties)\n\nWe verzamelen GEEN:\n- De inhoud van gegenereerde verhalen\n- Generatieparameters (leeftijd, geslacht, etc.)\n- Locatie\n- Contacten of foto's",
+      s3h: "3. Gebruik van gegevens",
+      s3p: "Uw gegevens worden uitsluitend gebruikt om:\n- U te authenticeren en uw account te beheren\n- Uw kreditsaldo bij te houden\n- Verhalen te genereren op basis van uw parameters\n- Uw kredietaankopen te verwerken",
+      s4h: "4. Diensten van derden",
+      s4p: "De applicatie maakt gebruik van gespecialiseerde diensten van derden voor:\n- Gebruikersauthenticatie\n- Stemgeneratie van verhalen\n- AI-tekstgeneratie\n- Beheer van in-app aankopen\n- Veilige gegevensopslag\n- Het weergeven van niet-gepersonaliseerde advertenties aan niet-premiumgebruikers (Google AdMob)\n\nDeze dienstverleners verwerken uw gegevens uitsluitend binnen het kader van hun opdrachten en hebben elk hun eigen privacybeleid. Als u zich in de Europese Economische Ruimte, het Verenigd Koninkrijk of Zwitserland bevindt, krijgt u een toestemmingsformulier te zien voordat er advertenties worden weergegeven.",
+      s5h: "5. Opslag en beveiliging",
+      s5p: "Uw gegevens worden veilig opgeslagen op servers gehost in Europa. Communicatie wordt versleuteld via HTTPS. We verkopen of delen uw persoonlijke gegevens niet met derden voor commerciële doeleinden.",
+      s6h: "6. Uw rechten",
+      s6p: "In overeenstemming met de AVG kunt u:\n- Toegang krijgen tot uw persoonlijke gegevens\n- Correctie van uw gegevens aanvragen\n- Verwijdering van uw account en gegevens aanvragen",
+      s7h: "7. Gezinspubliek",
+      s7p: "History Voice is bedoeld voor gezinsgebruik. Kinderen moeten de app gebruiken onder toezicht van een ouder of voogd. We verzamelen niet bewust persoonlijke gegevens van kinderen onder de 13 jaar zonder toestemming van de ouders.",
+      s8h: "8. Contact",
+      s8p: "Voor vragen over dit privacybeleid:\n\nHistory Voice - BelgaCai\nEmail: historyvoice@belgacai.com",
+      s8email: "historyvoice@belgacai.com",
+      footer: `© Copyright ${YEAR} - History Voice door BelgaCai`,
+      page_title: "History Voice - Privacybeleid",
+    },
+    de: {
+      title:   "Datenschutzrichtlinie",
+      updated: "Zuletzt aktualisiert: 1. August 2026",
+      s1h: "1. Einführung",
+      s1p: "BelgaCai gibt History Voice heraus, einen personalisierten Geschichten-Generator für Kinder und Erwachsene. Diese Richtlinie erklärt, welche Daten wir erheben, wie wir sie verwenden und welche Rechte Sie haben.",
+      s2h: "2. Erhobene Daten",
+      s2p: "Wir erheben folgende Daten:\n- E-Mail-Adresse (über Google-Anmeldung)\n- Credits-Guthaben (verbleibende Generierungszeit)\n- Werbe-ID, sofern Sie kein Premium-Abonnent sind (zur Anzeige nicht personalisierter Werbung)\n\nWir erheben NICHT:\n- Den Inhalt generierter Geschichten\n- Generierungsparameter (Alter, Genre usw.)\n- Standort\n- Kontakte oder Fotos",
+      s3h: "3. Datennutzung",
+      s3p: "Ihre Daten werden ausschließlich verwendet für:\n- Ihre Authentifizierung und Kontoverwaltung\n- Verfolgung Ihres Credits-Guthabens\n- Generierung von Geschichten nach Ihren Parametern\n- Verarbeitung Ihrer Credit-Käufe",
+      s4h: "4. Drittanbieter-Dienste",
+      s4p: "Die App nutzt spezialisierte Drittanbieter-Dienste für:\n- Die Benutzerauthentifizierung\n- Die Sprachgenerierung der Geschichten\n- Die KI-Textgenerierung\n- Die Verwaltung von In-App-Käufen\n- Die sichere Datenspeicherung\n- Die Anzeige nicht personalisierter Werbung für Nicht-Premium-Nutzer (Google AdMob)\n\nDiese Dienstleister verarbeiten Ihre Daten ausschließlich im Rahmen ihrer Aufgaben und verfügen jeweils über eine eigene Datenschutzrichtlinie. Wenn Sie sich im Europäischen Wirtschaftsraum, im Vereinigten Königreich oder in der Schweiz befinden, wird Ihnen vor jeder Werbeanzeige ein Einwilligungsformular angezeigt.",
+      s5h: "5. Speicherung und Sicherheit",
+      s5p: "Ihre Daten werden sicher auf in Europa gehosteten Servern gespeichert. Die Kommunikation ist über HTTPS verschlüsselt. Wir verkaufen oder teilen Ihre personenbezogenen Daten nicht mit Dritten zu kommerziellen Zwecken.",
+      s6h: "6. Ihre Rechte",
+      s6p: "Gemäß DSGVO können Sie:\n- Auf Ihre personenbezogenen Daten zugreifen\n- Die Korrektur Ihrer Daten verlangen\n- Die Löschung Ihres Kontos und Ihrer Daten verlangen",
+      s7h: "7. Familienpublikum",
+      s7p: "History Voice ist für den Familiengebrauch bestimmt. Kinder sollten die App unter Aufsicht eines Elternteils oder Erziehungsberechtigten verwenden. Wir erheben nicht wissentlich personenbezogene Daten von Kindern unter 13 Jahren ohne elterliche Zustimmung.",
+      s8h: "8. Kontakt",
+      s8p: "Bei Fragen zu dieser Datenschutzrichtlinie:\n\nHistory Voice - BelgaCai\nE-Mail: historyvoice@belgacai.com",
+      s8email: "historyvoice@belgacai.com",
+      footer: `© Copyright ${YEAR} - History Voice von BelgaCai`,
+      page_title: "History Voice - Datenschutzrichtlinie",
+    },
+    ar: {
+      title:   "سياسة الخصوصية",
+      updated: "آخر تحديث: 1 أغسطس 2026",
+      s1h: "1. مقدمة",
+      s1p: "تُصدر BelgaCai تطبيق History Voice، وهو مولّد قصص مخصصة للأطفال والبالغين. توضح هذه السياسة البيانات التي نجمعها وكيفية استخدامها وحقوقك.",
+      s2h: "2. البيانات المجمَّعة",
+      s2p: "نجمع البيانات التالية:\n- عنوان البريد الإلكتروني (عبر تسجيل الدخول بـ Google)\n- رصيد الاشتراك (وقت الإنشاء المتبقي)\n- معرّف الإعلانات، إذا لم تكن مشتركاً في النسخة المميزة (لعرض إعلانات غير مخصصة)\n\nلا نجمع:\n- محتوى القصص المنشأة\n- معاملات الإنشاء (العمر، النوع، إلخ)\n- الموقع الجغرافي\n- جهات الاتصال أو الصور",
+      s3h: "3. استخدام البيانات",
+      s3p: "تُستخدم بياناتك فقط لـ:\n- المصادقة وإدارة حسابك\n- تتبع رصيد الاشتراك\n- إنشاء القصص وفق معاملاتك\n- معالجة عمليات شراء الرصيد",
+      s4h: "4. خدمات الطرف الثالث",
+      s4p: "يستعين التطبيق بخدمات متخصصة من أطراف ثالثة من أجل:\n- مصادقة المستخدمين\n- توليد الصوت للقصص\n- توليد النصوص بالذكاء الاصطناعي\n- إدارة المشتريات داخل التطبيق\n- التخزين الآمن للبيانات\n- عرض إعلانات غير مخصصة للمستخدمين غير المشتركين في النسخة المميزة (Google AdMob)\n\nيعالج هؤلاء المزودون بياناتك في إطار مهامهم فقط، ولكل منهم سياسة خصوصية خاصة به. إذا كنت مقيماً في المنطقة الاقتصادية الأوروبية أو المملكة المتحدة أو سويسرا، سيتم عرض نموذج موافقة عليك قبل عرض أي إعلان.",
+      s5h: "5. التخزين والأمان",
+      s5p: "تُخزَّن بياناتك بأمان على خوادم مستضافة في أوروبا. تشفير الاتصالات عبر HTTPS. لا نبيع بياناتك الشخصية ولا نشاركها مع أطراف ثالثة لأغراض تجارية.",
+      s6h: "6. حقوقك",
+      s6p: "وفقاً للائحة GDPR، يمكنك:\n- الوصول إلى بياناتك الشخصية\n- طلب تصحيح بياناتك\n- طلب حذف حسابك وبياناتك",
+      s7h: "7. الجمهور العائلي",
+      s7p: "History Voice مخصصة للاستخدام العائلي. يجب على الأطفال استخدام التطبيق تحت إشراف أحد الوالدين أو الوصي. لا نجمع عن قصد بيانات شخصية من الأطفال دون 13 عاماً دون موافقة الوالدين.",
+      s8h: "8. التواصل",
+      s8p: "لأي استفسار يتعلق بسياسة الخصوصية:\n\nHistory Voice - BelgaCai\nالبريد الإلكتروني: historyvoice@belgacai.com",
+      s8email: "historyvoice@belgacai.com",
+      footer: `© Copyright ${YEAR} - History Voice بواسطة BelgaCai`,
+      page_title: "History Voice - سياسة الخصوصية",
+    },
+    tr: {
+      title:   "Gizlilik Politikası",
+      updated: "Son güncelleme: 1 Ağustos 2026",
+      s1h: "1. Giriş",
+      s1p: "BelgaCai, çocuklar ve yetişkinler için kişiselleştirilmiş bir hikaye üreticisi olan History Voice uygulamasını yayınlamaktadır. Bu politika hangi verileri topladığımızı, nasıl kullandığımızı ve haklarınızın neler olduğunu açıklar.",
+      s2h: "2. Toplanan Veriler",
+      s2p: "Aşağıdaki verileri topluyoruz:\n- E-posta adresi (Google girişi aracılığıyla)\n- Kredi bakiyesi (kalan üretim süresi)\n- Reklam kimliği, premium abone değilseniz (kişiselleştirilmemiş reklamların gösterilmesi için)\n\nToplamadıklarımız:\n- Oluşturulan hikayelerin içeriği\n- Üretim parametreleri (yaş, tür vb.)\n- Konum\n- Kişiler veya fotoğraflar",
+      s3h: "3. Veri Kullanımı",
+      s3p: "Verileriniz yalnızca şunlar için kullanılır:\n- Kimlik doğrulama ve hesap yönetimi\n- Kredi bakiyenizin takibi\n- Parametrelerinize göre hikaye üretimi\n- Kredi satın alma işlemlerinizin işlenmesi",
+      s4h: "4. Üçüncü Taraf Hizmetler",
+      s4p: "Uygulama şu amaçlar için özel üçüncü taraf hizmetlerinden yararlanır:\n- Kullanıcı kimlik doğrulama\n- Hikayelerin ses üretimi\n- Yapay zeka metin üretimi\n- Uygulama içi satın alma yönetimi\n- Güvenli veri depolama\n- Premium olmayan kullanıcılara kişiselleştirilmemiş reklamların gösterilmesi (Google AdMob)\n\nBu sağlayıcılar verilerinizi yalnızca görevleri çerçevesinde işler ve her birinin kendi gizlilik politikası bulunmaktadır. Avrupa Ekonomik Alanı, Birleşik Krallık veya İsviçre'de bulunuyorsanız, herhangi bir reklam gösterilmeden önce size bir onay formu sunulur.",
+      s5h: "5. Depolama ve Güvenlik",
+      s5p: "Verileriniz Avrupa'da barındırılan sunucularda güvenli bir şekilde saklanmaktadır. İletişimler HTTPS üzerinden şifrelenmektedir. Kişisel verilerinizi ticari amaçlarla üçüncü taraflara satmıyor veya paylaşmıyoruz.",
+      s6h: "6. Haklarınız",
+      s6p: "GDPR kapsamında şunları yapabilirsiniz:\n- Kişisel verilerinize erişim\n- Verilerinizin düzeltilmesini talep etme\n- Hesabınızın ve verilerinizin silinmesini talep etme",
+      s7h: "7. Aile Kitlesi",
+      s7p: "History Voice aile kullanımı için tasarlanmıştır. Çocuklar uygulamayı bir ebeveyn veya vasi gözetiminde kullanmalıdır. 13 yaşın altındaki çocuklardan ebeveyn izni olmaksızın bilerek kişisel veri toplamıyoruz.",
+      s8h: "8. İletişim",
+      s8p: "Bu gizlilik politikasıyla ilgili sorularınız için:\n\nHistory Voice - BelgaCai\nE-posta: historyvoice@belgacai.com",
+      s8email: "historyvoice@belgacai.com",
+      footer: `© Copyright ${YEAR} - History Voice, BelgaCai tarafından`,
+      page_title: "History Voice - Gizlilik Politikası",
+    },
+    pl: {
+      title:   "Polityka Prywatności",
+      updated: "Ostatnia aktualizacja: 1 sierpnia 2026",
+      s1h: "1. Wprowadzenie",
+      s1p: "BelgaCai wydaje aplikację History Voice, spersonalizowany generator historii dla dzieci i dorosłych. Niniejsza polityka wyjaśnia, jakie dane zbieramy, jak je wykorzystujemy i jakie są Twoje prawa.",
+      s2h: "2. Zbierane dane",
+      s2p: "Zbieramy następujące dane:\n- Adres e-mail (przez logowanie Google)\n- Saldo kredytów (pozostały czas generowania)\n- Identyfikator reklamowy, jeśli nie jesteś subskrybentem premium (do wyświetlania niespersonalizowanych reklam)\n\nNIE zbieramy:\n- Treści wygenerowanych historii\n- Parametrów generowania (wiek, gatunek itp.)\n- Lokalizacji\n- Kontaktów ani zdjęć",
+      s3h: "3. Wykorzystanie danych",
+      s3p: "Twoje dane są wykorzystywane wyłącznie do:\n- Uwierzytelniania i zarządzania kontem\n- Śledzenia salda kredytów\n- Generowania historii zgodnie z Twoimi parametrami\n- Przetwarzania zakupów kredytów",
+      s4h: "4. Usługi zewnętrzne",
+      s4p: "Aplikacja korzysta ze specjalistycznych usług zewnętrznych w celu:\n- Uwierzytelniania użytkowników\n- Generowania głosu historii\n- Generowania tekstu przez AI\n- Zarządzania zakupami w aplikacji\n- Bezpiecznego przechowywania danych\n- Wyświetlania niespersonalizowanych reklam użytkownikom bez subskrypcji premium (Google AdMob)\n\nCi usługodawcy przetwarzają Twoje dane wyłącznie w zakresie swoich zadań i każdy z nich posiada własną politykę prywatności. Jeśli znajdujesz się w Europejskim Obszarze Gospodarczym, Wielkiej Brytanii lub Szwajcarii, przed wyświetleniem jakiejkolwiek reklamy zostanie Ci przedstawiony formularz zgody.",
+      s5h: "5. Przechowywanie i bezpieczeństwo",
+      s5p: "Twoje dane są bezpiecznie przechowywane na serwerach hostowanych w Europie. Komunikacja jest szyfrowana przez HTTPS. Nie sprzedajemy ani nie udostępniamy Twoich danych osobowych osobom trzecim w celach komercyjnych.",
+      s6h: "6. Twoje prawa",
+      s6p: "Zgodnie z RODO możesz:\n- Uzyskać dostęp do swoich danych osobowych\n- Zażądać korekty swoich danych\n- Zażądać usunięcia konta i danych",
+      s7h: "7. Publiczność rodzinna",
+      s7p: "History Voice jest przeznaczony do użytku rodzinnego. Dzieci powinny korzystać z aplikacji pod nadzorem rodzica lub opiekuna. Nie zbieramy świadomie danych osobowych dzieci poniżej 13 roku życia bez zgody rodziców.",
+      s8h: "8. Kontakt",
+      s8p: "W przypadku pytań dotyczących niniejszej polityki prywatności:\n\nHistory Voice - BelgaCai\nE-mail: historyvoice@belgacai.com",
+      s8email: "historyvoice@belgacai.com",
+      footer: `© Copyright ${YEAR} - History Voice przez BelgaCai`,
+      page_title: "History Voice - Polityka Prywatności",
+    },
+  };
+
+  (function () {
+    const code = (navigator.language || 'fr').slice(0, 2).toLowerCase();
+    const t = T[code] || T.fr;
+
+    document.documentElement.lang = code;
+    document.title = t.page_title;
+
+    document.getElementById('t-title').textContent   = t.title;
+    document.getElementById('t-updated').textContent = t.updated;
+    document.getElementById('t-s1h').textContent = t.s1h;
+    document.getElementById('t-s1p').textContent = t.s1p;
+    document.getElementById('t-s2h').textContent = t.s2h;
+    document.getElementById('t-s2p').textContent = t.s2p;
+    document.getElementById('t-s3h').textContent = t.s3h;
+    document.getElementById('t-s3p').textContent = t.s3p;
+    document.getElementById('t-s4h').textContent = t.s4h;
+    document.getElementById('t-s4p').textContent = t.s4p;
+    document.getElementById('t-s5h').textContent = t.s5h;
+    document.getElementById('t-s5p').textContent = t.s5p;
+    document.getElementById('t-s6h').textContent = t.s6h;
+    document.getElementById('t-s6p').textContent = t.s6p;
+    document.getElementById('t-s7h').textContent = t.s7h;
+    document.getElementById('t-s7p').textContent = t.s7p;
+    document.getElementById('t-s8h').textContent = t.s8h;
+
+    // Section contact avec lien email cliquable
+    const s8p = document.getElementById('t-s8p');
+    s8p.textContent = t.s8p.replace('historyvoice@belgacai.com', '');
+    const link = document.createElement('a');
+    link.href = 'mailto:historyvoice@belgacai.com';
+    link.textContent = 'historyvoice@belgacai.com';
+    s8p.appendChild(link);
+
+    document.getElementById('t-footer').textContent = t.footer;
+  })();
+  </script>
+</body>
+</html>

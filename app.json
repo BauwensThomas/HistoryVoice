@@ -1,4 +1,7 @@
 {
   "name": "HistoryVoice",
-  "displayName": "HistoryVoice"
+  "displayName": "HistoryVoice",
+  "react-native-google-mobile-ads": {
+    "android_app_id": "ca-app-pub-3549294158319032~9029206532"
+  }
 }

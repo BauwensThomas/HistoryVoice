@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://history-voice.belgacai.com/sitemap.xml

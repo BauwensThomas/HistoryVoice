@@ -1,0 +1,12 @@
+{
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "deno.enable": false,
+    "deno.enablePaths": [
+        "supabase/functions"
+    ],
+    "java.compile.nullAnalysis.mode": "automatic",
+    "java.import.exclusions": [
+        "**/node_modules/**"
+    ],
+    "gradle.autoDetect": "off"
+}

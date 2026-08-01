@@ -8,3 +8,6 @@
 #   http://developer.android.com/guide/developing/tools/proguard.html
 
 # Add any project specific keep options here:
+
+# AdMob UMP (consentement RGPD)
+-keep class com.google.android.gms.internal.consent_sdk.** { *; }
