@@ -71,6 +71,11 @@ if ($LASTEXITCODE -ne 0) { throw "supabase db dump (data) a echoue (code $LASTEX
 & npx supabase db dump --linked --role-only -f (Join-Path $workDir "roles.sql")
 if ($LASTEXITCODE -ne 0) { throw "supabase db dump (roles) a echoue (code $LASTEXITCODE)" }
 
+# 1bis) Export JSON lisible de la table users (en plus du dump SQL complet)
+$usersRaw = & npx supabase db query --linked "select * from users order by user_number;"
+if ($LASTEXITCODE -ne 0) { throw "export JSON users a echoue (code $LASTEXITCODE)" }
+($usersRaw | ConvertFrom-Json).rows | ConvertTo-Json -Depth 10 | Out-File -Encoding utf8 (Join-Path $workDir "users.json")
+
 # 2) Storage : telecharge tous les buckets s'il y en a
 $storageDir = Join-Path $workDir "storage"
 New-Item -ItemType Directory -Force -Path $storageDir | Out-Null
