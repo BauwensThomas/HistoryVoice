@@ -44,11 +44,36 @@ export default {
   recharge_popular: 'POPULAR',
   recharge_buy: 'Buy',
   recharge_info: 'Credits are added instantly after payment. Purchases are managed by Google Play.',
+  recharge_premium_included: 'Premium: {{days}} ad-free days · 20-story library',
   recharge_success_title: 'Thank you!',
   recharge_success_message: 'Your credits have been added successfully.',
   recharge_error_title: 'Error',
   recharge_error_unavailable: 'This pack is not available at the moment.',
   recharge_error_purchase: 'An error occurred during the purchase. Please try again.',
+
+  // Library
+  library_title: 'Library',
+  library_count: '{{count}}/{{limit}} saved stories',
+  library_empty: 'No saved stories yet. Generate a story and tap "Save" to find it here.',
+  library_save: 'Save',
+  library_saved: 'Saved ✓',
+  library_delete_title: 'Delete this story?',
+  library_delete_confirm: 'This action cannot be undone.',
+  library_delete: 'Delete',
+  library_limit_title: 'Library full',
+  library_limit_message: 'You\'ve reached the limit of 3 saved stories. Go premium to save up to 20.',
+  library_limit_cta: 'See premium',
+  library_limit_message_premium: 'You\'ve reached the limit of 20 saved stories. Delete one to add a new one.',
+  library_limit_cta_premium: 'See my library',
+  library_premium_promo: 'Go premium to save up to 20 stories (instead of 3).',
+
+  // Bedtime reminder
+  notif_section_title: 'Bedtime reminder',
+  notif_heure_label: 'Time',
+  notif_titre: '🌙 Story time',
+  notif_message: 'Time to create a new bedtime story!',
+  notif_message_sans_credits: 'Buy credits to keep creating your bedtime stories!',
+  notif_permission_refusee: 'You need to allow notifications in your phone settings to enable this reminder.',
 
   // Messages
   msg_histoire_prete: 'The story is ready!',

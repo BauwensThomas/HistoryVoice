@@ -9,6 +9,7 @@ import {
   Alert,
   Keyboard,
   ScrollView,
+  Switch,
 } from 'react-native';
 import { useTranslation } from 'react-i18next';
 import { Colors } from '../theme/colors';
@@ -16,6 +17,9 @@ import DropdownPicker from '../components/DropdownPicker';
 import AnimatedBackground from '../components/AnimatedBackground';
 import BookLoadingModal from '../components/BookLoadingModal';
 import CustomAlertModal from '../components/CustomAlertModal';
+import BellIcon from '../components/icons/BellIcon';
+import LibraryIcon from '../components/icons/LibraryIcon';
+import LogoutIcon from '../components/icons/LogoutIcon';
 import { genererHistoireAvecRetry } from '../services/groqService';
 import { genererAudio } from '../services/ttsService';
 import {
@@ -31,6 +35,11 @@ import { getAgeFromIndex, obtenirNombreMotsCible } from '../utils/wordCount';
 import { LANGUAGE_IDS } from '../config/ttsVoices';
 import { signOut, getCurrentUser } from '../services/authService';
 import { addStorySeconds, checkAndPromptReview } from '../services/reviewService';
+import {
+  activerRappelSoir,
+  desactiverRappelSoir,
+  chargerPreferenceRappel,
+} from '../services/notificationService';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Sound from 'react-native-sound';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
@@ -83,6 +92,11 @@ export default function MainScreen({ navigation }: MainScreenProps) {
   const [keyboardHeight, setKeyboardHeight] = useState(0);
   const descriptionY = useRef(0);
 
+  // State: rappel du soir
+  const HEURES_RAPPEL = [18, 19, 20, 21, 22];
+  const [rappelActif, setRappelActif] = useState(false);
+  const [rappelHeure, setRappelHeure] = useState(19);
+
   // Récupérer les tableaux traduits
   const ages = t('ages', { returnObjects: true }) as string[];
   const sexes = t('sexes', { returnObjects: true }) as string[];
@@ -99,7 +113,46 @@ export default function MainScreen({ navigation }: MainScreenProps) {
     });
     chargerCredits().then(setCreditsSecondes);
     chargerStatutPremium().then(setIsPremium);
+    chargerPreferenceRappel().then(heure => {
+      if (heure !== null) {
+        setRappelActif(true);
+        setRappelHeure(heure);
+      }
+    });
   }, []);
+
+  // Le message du rappel dépend du solde actuel : incite à créer une histoire
+  // s'il reste des crédits, ou à en racheter sinon. Recalculé et reprogrammé
+  // à chaque ouverture de l'app (une notif planifiée a un contenu figé, on ne
+  // peut pas connaître le solde exact au moment où elle se déclenchera plus tard).
+  const messageRappelActuel = (credits: number): string =>
+    credits < 60 ? t('notif_message_sans_credits') : t('notif_message');
+
+  // Reprogramme le rappel avec un message à jour dès que le solde change
+  // (chargement initial, focus, après génération...), si le rappel est actif.
+  useEffect(() => {
+    if (!rappelActif) return;
+    activerRappelSoir(rappelHeure, t('notif_titre'), messageRappelActuel(creditsSecondes));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [creditsSecondes, rappelActif, rappelHeure]);
+
+  const handleToggleRappel = async (value: boolean) => {
+    if (value) {
+      const succes = await activerRappelSoir(
+        rappelHeure,
+        t('notif_titre'),
+        messageRappelActuel(creditsSecondes),
+      );
+      if (succes) {
+        setRappelActif(true);
+      } else {
+        Alert.alert(t('notif_permission_refusee'));
+      }
+    } else {
+      await desactiverRappelSoir();
+      setRappelActif(false);
+    }
+  };
 
   // Rafraîchir les crédits/premium quand on revient sur cet écran (ex: retour de RechargeScreen)
   useEffect(() => {
@@ -263,10 +316,20 @@ export default function MainScreen({ navigation }: MainScreenProps) {
 
       setLoading(false);
       navigation.navigate('Story', {
+        mode: 'new',
         histoireGeneree: texte,
         audioFilePath: filePath,
         showReviewModal: shouldShow,
         reviewTotal: currentTotal,
+        age,
+        ageLabel: ages[ageIndex],
+        sexe: sexes[sexeIndex],
+        genre: genres[genreIndex],
+        moment: moments[momentIndex],
+        dureeSecondes: dureeReelle,
+        langueId,
+        voixId: voixId as 'male' | 'female',
+        description,
       });
     } catch (error: any) {
       console.error(`Erreur génération [${etape}]:`, error);
@@ -309,9 +372,14 @@ export default function MainScreen({ navigation }: MainScreenProps) {
             </View>
           </View>
           <TouchableOpacity
+            style={styles.btnBibliotheque}
+            onPress={() => navigation.navigate('Library')}>
+            <LibraryIcon size={20} color={Colors.natureGreen} />
+          </TouchableOpacity>
+          <TouchableOpacity
             style={styles.btnDeconnexion}
             onPress={handleDeconnexion}>
-            <Text style={styles.btnDeconnexionText}>{t('btn_deconnexion')}</Text>
+            <LogoutIcon size={20} color={Colors.error} />
           </TouchableOpacity>
         </View>
 
@@ -422,6 +490,31 @@ export default function MainScreen({ navigation }: MainScreenProps) {
           />
         </View>
 
+        {/* ━━━ RAPPEL DU SOIR ━━━ */}
+        <View style={styles.rappelCard}>
+          <View style={styles.rappelRow}>
+            <View style={styles.rappelLabelRow}>
+              <BellIcon size={16} color={Colors.textPrimary} />
+              <Text style={styles.rappelLabel}>{t('notif_section_title')}</Text>
+            </View>
+            <Switch
+              value={rappelActif}
+              onValueChange={handleToggleRappel}
+              trackColor={{ true: Colors.primary }}
+            />
+          </View>
+          {rappelActif && (
+            <View style={styles.rappelHeureRow}>
+              <DropdownPicker
+                label={t('notif_heure_label')}
+                value={`${rappelHeure}:00`}
+                options={HEURES_RAPPEL.map(h => `${h}:00`)}
+                onSelect={(_, idx) => setRappelHeure(HEURES_RAPPEL[idx])}
+              />
+            </View>
+          )}
+        </View>
+
         {/* ━━━ BOUTON CRÉER ━━━ */}
         <TouchableOpacity
           style={[styles.btnCreer, loading && styles.btnDisabled]}
@@ -450,7 +543,9 @@ export default function MainScreen({ navigation }: MainScreenProps) {
         />
 
         {/* ━━━ PUB BANDEAU ━━━ */}
-        <AdBanner isPremium={isPremium} />
+        <View style={styles.adWrapper}>
+          <AdBanner isPremium={isPremium} />
+        </View>
 
         {/* ━━━ FOOTER ━━━ */}
         <Text style={styles.version}>Version {version}</Text>
@@ -515,18 +610,26 @@ const styles = StyleSheet.create({
     fontSize: 11,
     fontWeight: 'bold',
   },
-  btnDeconnexion: {
-    backgroundColor: Colors.error,
-    paddingHorizontal: 14,
-    paddingVertical: 8,
+  btnBibliotheque: {
+    backgroundColor: Colors.white,
+    width: 40,
+    height: 40,
     borderRadius: 20,
     justifyContent: 'center',
     alignItems: 'center',
+    marginRight: 8,
+    borderWidth: 1.5,
+    borderColor: Colors.natureGreen,
   },
-  btnDeconnexionText: {
-    fontSize: 12,
-    fontWeight: 'bold',
-    color: Colors.white,
+  btnDeconnexion: {
+    backgroundColor: Colors.white,
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderWidth: 1.5,
+    borderColor: Colors.error,
   },
 
   // Titre
@@ -590,6 +693,34 @@ const styles = StyleSheet.create({
     color: Colors.textPrimary,
   },
 
+  // Rappel du soir
+  rappelCard: {
+    backgroundColor: Colors.cardBackgroundAlt,
+    borderRadius: 20,
+    borderWidth: 1.5,
+    borderColor: Colors.border,
+    padding: 16,
+    marginBottom: 24,
+  },
+  rappelRow: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  rappelLabelRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 6,
+  },
+  rappelLabel: {
+    fontSize: 14,
+    fontWeight: '600',
+    color: Colors.textPrimary,
+  },
+  rappelHeureRow: {
+    marginTop: 12,
+  },
+
   // Bouton Créer
   btnCreer: {
     width: '100%',
@@ -606,6 +737,9 @@ const styles = StyleSheet.create({
   },
   btnDisabled: {
     opacity: 0.6,
+  },
+  adWrapper: {
+    marginTop: 20,
   },
   btnCreerText: {
     color: Colors.white,

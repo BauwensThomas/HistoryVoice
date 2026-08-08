@@ -44,11 +44,36 @@ export default {
   recharge_popular: 'POPULAIRE',
   recharge_buy: 'Acheter',
   recharge_info: 'Les crédits sont ajoutés instantanément après le paiement. Les achats sont gérés par Google Play.',
+  recharge_premium_included: 'Premium : {{days}} jours sans pub · 20 histoires en bibliothèque',
   recharge_success_title: 'Merci !',
   recharge_success_message: 'Vos crédits ont été ajoutés avec succès.',
   recharge_error_title: 'Erreur',
   recharge_error_unavailable: 'Ce pack n\'est pas disponible pour le moment.',
   recharge_error_purchase: 'Une erreur est survenue lors de l\'achat. Veuillez réessayer.',
+
+  // Bibliothèque
+  library_title: 'Bibliothèque',
+  library_count: '{{count}}/{{limit}} histoires sauvegardées',
+  library_empty: 'Aucune histoire sauvegardée pour l\'instant. Générez une histoire et appuyez sur "Sauvegarder" pour la retrouver ici.',
+  library_save: 'Sauvegarder',
+  library_saved: 'Sauvegardée ✓',
+  library_delete_title: 'Supprimer cette histoire ?',
+  library_delete_confirm: 'Cette action est définitive.',
+  library_delete: 'Supprimer',
+  library_limit_title: 'Bibliothèque pleine',
+  library_limit_message: "Vous avez atteint la limite de 3 histoires sauvegardées. Passez premium pour en sauvegarder jusqu'à 20.",
+  library_limit_cta: 'Voir premium',
+  library_limit_message_premium: 'Vous avez atteint la limite de 20 histoires sauvegardées. Supprimez-en une pour en ajouter une nouvelle.',
+  library_limit_cta_premium: 'Voir ma bibliothèque',
+  library_premium_promo: "Passez premium pour sauvegarder jusqu'à 20 histoires (au lieu de 3).",
+
+  // Rappel du soir
+  notif_section_title: 'Rappel du soir',
+  notif_heure_label: 'Heure',
+  notif_titre: "🌙 L'heure de l'histoire",
+  notif_message: "C'est le moment de créer une nouvelle histoire du soir !",
+  notif_message_sans_credits: 'Achetez des crédits pour continuer vos histoires du soir !',
+  notif_permission_refusee: 'Vous devez autoriser les notifications dans les paramètres de votre téléphone pour activer ce rappel.',
 
   // Messages
   msg_histoire_prete: "L'histoire est prête !",

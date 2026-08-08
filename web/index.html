@@ -236,8 +236,8 @@
     .steps-wrap { background: rgba(103,80,164,.07); }
     .steps-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 40px; max-width: 880px; margin: 0 auto;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 32px; max-width: 960px; margin: 0 auto;
     }
     .step { text-align: center; }
     .step-num {
@@ -327,7 +327,7 @@
       .phone { width: 160px; height: 320px; }
       .phone.mid { width: 185px; height: 365px; transform: translateY(-18px); }
       .features-grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-      .steps-grid { gap: 28px; }
+      .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 28px; }
       .pricing-grid { grid-template-columns: repeat(2, 1fr); }
       .dl-box { padding: 48px 32px; }
     }
@@ -455,7 +455,7 @@
       <div class="feat">
         <div class="feat-icon">🤖</div>
         <h3 data-i18n="f1h">IA créative</h3>
-        <p  data-i18n="f1p">Histoires 100% originales générées par l'IA — jamais deux fois la même.</p>
+        <p  data-i18n="f1p">Histoires 100% originales générées par l'IA, jamais deux fois la même.</p>
       </div>
       <div class="feat">
         <div class="feat-icon">🔊</div>
@@ -478,9 +478,9 @@
         <p  data-i18n="f5p">Histoire générée et narrée en moins de 30 secondes. Parfait pour le soir.</p>
       </div>
       <div class="feat">
-        <div class="feat-icon">🔒</div>
-        <h3 data-i18n="f6h">Privé et sécurisé</h3>
-        <p  data-i18n="f6p">Vos histoires ne sont jamais stockées. Seul votre email est conservé.</p>
+        <div class="feat-icon">📚</div>
+        <h3 data-i18n="f6h">Bibliothèque personnelle</h3>
+        <p  data-i18n="f6p">Sauvegardez vos histoires favorites et réécoutez-les gratuitement, à tout moment.</p>
       </div>
     </div>
   </section>
@@ -504,6 +504,11 @@
         <div class="step-num">3</div>
         <h3 data-i18n="s3h">Écoutez</h3>
         <p  data-i18n="s3p">La voix naturelle narre l'histoire. Fermez les yeux et laissez la magie opérer.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">4</div>
+        <h3 data-i18n="s4h">Sauvegardez</h3>
+        <p  data-i18n="s4p">Gardez l'histoire dans votre bibliothèque pour la réécouter gratuitement, à tout moment.</p>
       </div>
     </div>
   </section>
@@ -537,7 +542,7 @@
         </div>
       </div>
     </div>
-    <p class="screenshots-note" data-i18n="sc_note">* Captures d'écran illustratives — téléchargez l'app pour voir la vraie magie</p>
+    <p class="screenshots-note" data-i18n="sc_note">* Captures d'écran illustratives. Téléchargez l'app pour voir la vraie magie</p>
   </section>
 
   <!-- ═══ DOWNLOAD ═══ -->
@@ -577,21 +582,22 @@
       m2_l:"Histoire générée", m2_t:"Une histoire unique créée en quelques secondes", m2_b:"▶ Écouter",
       m3_l:"Narration vocale", m3_t:"Voix naturelle dans votre langue",
       feat_h:"Tout ce qu'il vous faut", feat_s:"Une application pensée pour les familles",
-      f1h:"IA créative",         f1p:"Histoires 100% originales — jamais deux fois la même.",
+      f1h:"IA créative",         f1p:"Histoires 100% originales, jamais deux fois la même.",
       f2h:"Voix naturelle",      f2p:"Narration audio dans 10 langues.",
       f3h:"10 langues",          f3p:"Français, Anglais, Espagnol, Portugais, Italien, Néerlandais, Allemand, Arabe, Turc, Polonais.",
       f4h:"Pour toute la famille",f4p:"Enfants de 3 à 12 ans et adultes.",
       f5h:"En quelques secondes", f5p:"Générée et narrée en moins de 30 secondes.",
-      f6h:"Privé et sécurisé",   f6p:"Vos histoires ne sont jamais stockées.",
-      how_h:"Comment ça marche", how_s:"3 étapes, c'est tout",
+      f6h:"Bibliothèque personnelle",f6p:"Sauvegardez vos histoires favorites et réécoutez-les gratuitement, à tout moment.",
+      how_h:"Comment ça marche", how_s:"4 étapes, c'est tout",
       s1h:"Personnalisez", s1p:"Âge, sexe du héros, thème, langue et durée.",
       s2h:"Générez",       s2p:"L'IA crée une histoire unique en quelques secondes.",
       s3h:"Écoutez",       s3p:"La voix naturelle narre l'histoire. Fermez les yeux.",
+      s4h:"Sauvegardez",   s4p:"Gardez-la dans votre bibliothèque pour la réécouter gratuitement.",
       sc_h:"L'application en images", sc_s:"Simple, beau, magique",
       sc1:"Écran d'accueil", sc1d:"Entrez dans l'atelier magique",
       sc2:"Paramètres", sc2d:"Âge · Genre · Thème · Langue · Durée", sc2b:"✨ Créer l'histoire",
       sc3:"Lecture", sc3d:"Narration en cours…",
-      sc_note:"* Captures illustratives — téléchargez l'app pour voir la vraie magie",
+      sc_note:"* Captures illustratives. Téléchargez l'app pour voir la vraie magie",
       pr_h:"Tarifs simples", pr_s:"Commencez gratuitement, rechargez quand vous voulez",
       p0l:"Gratuit", p0v:"Offert", p0s:"À l'inscription", p0n:"Crédits d'essai inclus",
       p1l:"Starter", p1s:"De narration audio", p1n:"~6 histoires",
@@ -599,7 +605,7 @@
       p3l:"Premium", p3s:"De narration audio", p3n:"~36 histoires",
       dl_h:"Prêt pour la première histoire ?", dl_p:"Téléchargement gratuit · Aucune carte requise",
       ft_priv:"Politique de confidentialité", ft_del:"Supprimer mon compte",
-      ft_contact:"Contact", ft_copy:`© ${YEAR} History Voice — BelgaCai`,
+      ft_contact:"Contact", ft_copy:`© ${YEAR} History Voice par BelgaCai`,
       play_locale:"fr", page_title:"History Voice – Générateur d'histoires IA pour enfants",
     },
     en: {
@@ -613,21 +619,22 @@
       m2_l:"Story generated", m2_t:"A unique story created in seconds by AI", m2_b:"▶ Listen",
       m3_l:"Voice narration", m3_t:"Natural voice in your language",
       feat_h:"Everything you need", feat_s:"An app designed for families",
-      f1h:"Creative AI",          f1p:"100% original stories — never the same twice.",
+      f1h:"Creative AI",          f1p:"100% original stories, never the same twice.",
       f2h:"Natural voice",        f2p:"Audio narration in 10 languages.",
       f3h:"10 languages",         f3p:"French, English, Spanish, Portuguese, Italian, Dutch, German, Arabic, Turkish, Polish.",
       f4h:"For the whole family", f4p:"Children aged 3 to 12 and adults.",
       f5h:"In seconds",           f5p:"Generated and narrated in under 30 seconds.",
-      f6h:"Private & secure",     f6p:"Your stories are never stored.",
-      how_h:"How it works", how_s:"3 steps, that's all",
+      f6h:"Personal library",     f6p:"Save your favorite stories and replay them for free, anytime.",
+      how_h:"How it works", how_s:"4 steps, that's all",
       s1h:"Customize", s1p:"Age, hero gender, theme, language and duration.",
       s2h:"Generate",   s2p:"AI creates a unique story in seconds.",
       s3h:"Listen",     s3p:"The natural voice narrates the story. Close your eyes.",
+      s4h:"Save",       s4p:"Keep it in your library to replay it for free, anytime.",
       sc_h:"The app in pictures", sc_s:"Simple, beautiful, magical",
       sc1:"Home screen", sc1d:"Enter the magic workshop",
       sc2:"Settings", sc2d:"Age · Gender · Theme · Language · Duration", sc2b:"✨ Create story",
       sc3:"Playback", sc3d:"Narration in progress…",
-      sc_note:"* Illustrative screenshots — download the app to see the real magic",
+      sc_note:"* Illustrative screenshots. Download the app to see the real magic",
       pr_h:"Simple pricing", pr_s:"Start for free, top up whenever you want",
       p0l:"Free", p0v:"Gift", p0s:"On sign-up", p0n:"Trial credits included",
       p1l:"Starter", p1s:"Of audio narration", p1n:"~6 stories",
@@ -635,7 +642,7 @@
       p3l:"Premium", p3s:"Of audio narration", p3n:"~36 stories",
       dl_h:"Ready for the first story?", dl_p:"Free download · No card required",
       ft_priv:"Privacy Policy", ft_del:"Delete my account",
-      ft_contact:"Contact", ft_copy:`© ${YEAR} History Voice — BelgaCai`,
+      ft_contact:"Contact", ft_copy:`© ${YEAR} History Voice by BelgaCai`,
       play_locale:"en", page_title:"History Voice – AI Story Generator for Children",
     },
     es: {
@@ -649,21 +656,22 @@
       m2_l:"Cuento generado", m2_t:"Un cuento único creado en segundos por IA", m2_b:"▶ Escuchar",
       m3_l:"Narración de voz", m3_t:"Voz natural en tu idioma",
       feat_h:"Todo lo que necesitas", feat_s:"Una app pensada para familias",
-      f1h:"IA creativa",          f1p:"Cuentos 100% originales — nunca el mismo dos veces.",
+      f1h:"IA creativa",          f1p:"Cuentos 100% originales, nunca el mismo dos veces.",
       f2h:"Voz natural",          f2p:"Narración de audio en 10 idiomas.",
       f3h:"10 idiomas",           f3p:"Francés, Inglés, Español, Portugués, Italiano, Neerlandés, Alemán, Árabe, Turco, Polaco.",
       f4h:"Para toda la familia", f4p:"Niños de 3 a 12 años y adultos.",
       f5h:"En segundos",          f5p:"Generado y narrado en menos de 30 segundos.",
-      f6h:"Privado y seguro",     f6p:"Tus historias nunca se almacenan.",
-      how_h:"Cómo funciona", how_s:"3 pasos, eso es todo",
+      f6h:"Biblioteca personal",  f6p:"Guarda tus cuentos favoritos y vuelve a escucharlos gratis, cuando quieras.",
+      how_h:"Cómo funciona", how_s:"4 pasos, eso es todo",
       s1h:"Personaliza", s1p:"Edad, género, tema, idioma y duración.",
       s2h:"Genera",       s2p:"La IA crea un cuento único en segundos.",
       s3h:"Escucha",      s3p:"La voz natural narra el cuento. Cierra los ojos.",
+      s4h:"Guarda",       s4p:"Guárdalo en tu biblioteca para volver a escucharlo gratis.",
       sc_h:"La app en imágenes", sc_s:"Simple, bonita, mágica",
       sc1:"Pantalla de inicio", sc1d:"Entra en el taller mágico",
       sc2:"Ajustes", sc2d:"Edad · Género · Tema · Idioma · Duración", sc2b:"✨ Crear cuento",
       sc3:"Reproducción", sc3d:"Narración en curso…",
-      sc_note:"* Capturas ilustrativas — descarga la app para ver la magia real",
+      sc_note:"* Capturas ilustrativas. Descarga la app para ver la magia real",
       pr_h:"Precios simples", pr_s:"Empieza gratis, recarga cuando quieras",
       p0l:"Gratis", p0v:"Regalo", p0s:"Al registrarse", p0n:"Créditos de prueba incluidos",
       p1l:"Starter", p1s:"De narración de audio", p1n:"~6 cuentos",
@@ -671,7 +679,7 @@
       p3l:"Premium", p3s:"De narración de audio", p3n:"~36 cuentos",
       dl_h:"¿Listo para el primer cuento?", dl_p:"Descarga gratuita · Sin tarjeta",
       ft_priv:"Política de privacidad", ft_del:"Eliminar mi cuenta",
-      ft_contact:"Contacto", ft_copy:`© ${YEAR} History Voice — BelgaCai`,
+      ft_contact:"Contacto", ft_copy:`© ${YEAR} History Voice por BelgaCai`,
       play_locale:"es", page_title:"History Voice – Generador de Cuentos IA para Niños",
     },
     pt: {
@@ -685,21 +693,22 @@
       m2_l:"História gerada", m2_t:"Uma história única criada em segundos pela IA", m2_b:"▶ Ouvir",
       m3_l:"Narração de voz", m3_t:"Voz natural no seu idioma",
       feat_h:"Tudo o que você precisa", feat_s:"Um app pensado para famílias",
-      f1h:"IA criativa",          f1p:"Histórias 100% originais — nunca a mesma duas vezes.",
+      f1h:"IA criativa",          f1p:"Histórias 100% originais, nunca a mesma duas vezes.",
       f2h:"Voz natural",          f2p:"Narração de áudio em 10 idiomas.",
       f3h:"10 idiomas",           f3p:"Francês, Inglês, Espanhol, Português, Italiano, Holandês, Alemão, Árabe, Turco, Polonês.",
       f4h:"Para toda a família",  f4p:"Crianças de 3 a 12 anos e adultos.",
       f5h:"Em segundos",          f5p:"Gerada e narrada em menos de 30 segundos.",
-      f6h:"Privado e seguro",     f6p:"Suas histórias nunca são armazenadas.",
-      how_h:"Como funciona", how_s:"3 passos, só isso",
+      f6h:"Biblioteca pessoal",   f6p:"Salve suas histórias favoritas e reescute-as gratuitamente, a qualquer momento.",
+      how_h:"Como funciona", how_s:"4 passos, só isso",
       s1h:"Personalize", s1p:"Idade, gênero, tema, idioma e duração.",
       s2h:"Gere",         s2p:"A IA cria uma história única em segundos.",
       s3h:"Ouça",         s3p:"A voz natural narra a história. Feche os olhos.",
+      s4h:"Salve",        s4p:"Guarde-a na sua biblioteca para reescutá-la gratuitamente.",
       sc_h:"O app em imagens", sc_s:"Simples, bonito, mágico",
       sc1:"Tela inicial", sc1d:"Entre no atelier mágico",
       sc2:"Configurações", sc2d:"Idade · Gênero · Tema · Idioma · Duração", sc2b:"✨ Criar história",
       sc3:"Reprodução", sc3d:"Narração em andamento…",
-      sc_note:"* Capturas ilustrativas — baixe o app para ver a magia de verdade",
+      sc_note:"* Capturas ilustrativas. Baixe o app para ver a magia de verdade",
       pr_h:"Preços simples", pr_s:"Comece de graça, recarregue quando quiser",
       p0l:"Gratuito", p0v:"Oferta", p0s:"No cadastro", p0n:"Créditos de teste incluídos",
       p1l:"Starter", p1s:"De narração de áudio", p1n:"~6 histórias",
@@ -707,7 +716,7 @@
       p3l:"Premium", p3s:"De narração de áudio", p3n:"~36 histórias",
       dl_h:"Pronto para a primeira história?", dl_p:"Download gratuito · Sem cartão",
       ft_priv:"Política de privacidade", ft_del:"Excluir minha conta",
-      ft_contact:"Contato", ft_copy:`© ${YEAR} History Voice — BelgaCai`,
+      ft_contact:"Contato", ft_copy:`© ${YEAR} History Voice por BelgaCai`,
       play_locale:"pt", page_title:"History Voice – Gerador de Histórias IA para Crianças",
     },
     it: {
@@ -721,21 +730,22 @@
       m2_l:"Storia generata", m2_t:"Una storia unica creata in secondi dall'IA", m2_b:"▶ Ascolta",
       m3_l:"Narrazione vocale", m3_t:"Voce naturale nella tua lingua",
       feat_h:"Tutto ciò di cui hai bisogno", feat_s:"Un'app pensata per le famiglie",
-      f1h:"IA creativa",          f1p:"Storie 100% originali — mai la stessa due volte.",
+      f1h:"IA creativa",          f1p:"Storie 100% originali, mai la stessa due volte.",
       f2h:"Voce naturale",        f2p:"Narrazione audio in 10 lingue.",
       f3h:"10 lingue",            f3p:"Francese, Inglese, Spagnolo, Portoghese, Italiano, Olandese, Tedesco, Arabo, Turco, Polacco.",
       f4h:"Per tutta la famiglia",f4p:"Bambini da 3 a 12 anni e adulti.",
       f5h:"In pochi secondi",     f5p:"Generata e narrata in meno di 30 secondi.",
-      f6h:"Privato e sicuro",     f6p:"Le tue storie non vengono mai archiviate.",
-      how_h:"Come funziona", how_s:"3 passi, tutto qui",
+      f6h:"Libreria personale",   f6p:"Salva le tue storie preferite e riascoltale gratuitamente, in qualsiasi momento.",
+      how_h:"Come funziona", how_s:"4 passi, tutto qui",
       s1h:"Personalizza", s1p:"Età, sesso, tema, lingua e durata.",
       s2h:"Genera",        s2p:"L'IA crea una storia unica in pochi secondi.",
       s3h:"Ascolta",       s3p:"La voce naturale narra la storia. Chiudi gli occhi.",
+      s4h:"Salva",         s4p:"Conservala nella tua libreria per riascoltarla gratuitamente.",
       sc_h:"L'app in immagini", sc_s:"Semplice, bella, magica",
       sc1:"Schermata iniziale", sc1d:"Entra nell'atelier magico",
       sc2:"Impostazioni", sc2d:"Età · Sesso · Tema · Lingua · Durata", sc2b:"✨ Crea storia",
       sc3:"Riproduzione", sc3d:"Narrazione in corso…",
-      sc_note:"* Schermate illustrative — scarica l'app per vedere la vera magia",
+      sc_note:"* Schermate illustrative. Scarica l'app per vedere la vera magia",
       pr_h:"Prezzi semplici", pr_s:"Inizia gratis, ricarica quando vuoi",
       p0l:"Gratuito", p0v:"Regalo", p0s:"All'iscrizione", p0n:"Crediti di prova inclusi",
       p1l:"Starter", p1s:"Di narrazione audio", p1n:"~6 storie",
@@ -743,7 +753,7 @@
       p3l:"Premium", p3s:"Di narrazione audio", p3n:"~36 storie",
       dl_h:"Pronto per la prima storia?", dl_p:"Download gratuito · Nessuna carta richiesta",
       ft_priv:"Informativa sulla privacy", ft_del:"Elimina il mio account",
-      ft_contact:"Contatto", ft_copy:`© ${YEAR} History Voice — BelgaCai`,
+      ft_contact:"Contatto", ft_copy:`© ${YEAR} History Voice di BelgaCai`,
       play_locale:"it", page_title:"History Voice – Generatore di Storie IA per Bambini",
     },
     nl: {
@@ -757,21 +767,22 @@
       m2_l:"Verhaal gegenereerd", m2_t:"Een uniek verhaal in seconden door AI", m2_b:"▶ Luisteren",
       m3_l:"Stemvertelling", m3_t:"Natuurlijke stem in uw taal",
       feat_h:"Alles wat u nodig heeft", feat_s:"Een app ontworpen voor gezinnen",
-      f1h:"Creatieve AI",         f1p:"100% originele verhalen — nooit hetzelfde twee keer.",
+      f1h:"Creatieve AI",         f1p:"100% originele verhalen, nooit hetzelfde twee keer.",
       f2h:"Natuurlijke stem",     f2p:"Audio-vertelling in 10 talen.",
       f3h:"10 talen",             f3p:"Frans, Engels, Spaans, Portugees, Italiaans, Nederlands, Duits, Arabisch, Turks, Pools.",
       f4h:"Voor het hele gezin",  f4p:"Kinderen van 3 tot 12 jaar en volwassenen.",
       f5h:"In seconden",          f5p:"Gegenereerd en verteld in minder dan 30 seconden.",
-      f6h:"Privé en veilig",      f6p:"Uw verhalen worden nooit opgeslagen.",
-      how_h:"Hoe het werkt", how_s:"3 stappen, dat is alles",
+      f6h:"Persoonlijke bibliotheek",f6p:"Sla je favoriete verhalen op en beluister ze gratis opnieuw, wanneer je wilt.",
+      how_h:"Hoe het werkt", how_s:"4 stappen, dat is alles",
       s1h:"Personaliseer", s1p:"Leeftijd, geslacht, thema, taal en duur.",
       s2h:"Genereer",       s2p:"AI maakt een uniek verhaal in seconden.",
       s3h:"Luister",        s3p:"De natuurlijke stem vertelt het verhaal. Sluit je ogen.",
+      s4h:"Bewaar",         s4p:"Sla het op in je bibliotheek om het gratis opnieuw te beluisteren.",
       sc_h:"De app in beelden", sc_s:"Eenvoudig, mooi, magisch",
       sc1:"Startscherm", sc1d:"Betreed de magische werkplaats",
       sc2:"Instellingen", sc2d:"Leeftijd · Geslacht · Thema · Taal · Duur", sc2b:"✨ Verhaal maken",
       sc3:"Afspelen", sc3d:"Vertelling bezig…",
-      sc_note:"* Illustratieve schermafbeeldingen — download de app voor de echte magie",
+      sc_note:"* Illustratieve schermafbeeldingen. Download de app voor de echte magie",
       pr_h:"Eenvoudige prijzen", pr_s:"Begin gratis, laad op wanneer u wilt",
       p0l:"Gratis", p0v:"Cadeau", p0s:"Bij aanmelding", p0n:"Proeftegoeden inbegrepen",
       p1l:"Starter", p1s:"Audio-vertelling", p1n:"~6 verhalen",
@@ -779,7 +790,7 @@
       p3l:"Premium", p3s:"Audio-vertelling", p3n:"~36 verhalen",
       dl_h:"Klaar voor het eerste verhaal?", dl_p:"Gratis downloaden · Geen kaart vereist",
       ft_priv:"Privacybeleid", ft_del:"Verwijder mijn account",
-      ft_contact:"Contact", ft_copy:`© ${YEAR} History Voice — BelgaCai`,
+      ft_contact:"Contact", ft_copy:`© ${YEAR} History Voice door BelgaCai`,
       play_locale:"nl", page_title:"History Voice – AI Verhaalengenerator voor Kinderen",
     },
     de: {
@@ -793,21 +804,22 @@
       m2_l:"Geschichte generiert", m2_t:"Eine einzigartige Geschichte in Sekunden durch KI", m2_b:"▶ Anhören",
       m3_l:"Spracherzählung", m3_t:"Natürliche Stimme in deiner Sprache",
       feat_h:"Alles was du brauchst", feat_s:"Eine App für Familien",
-      f1h:"Kreative KI",           f1p:"100% originale Geschichten — nie zweimal dieselbe.",
+      f1h:"Kreative KI",           f1p:"100% originale Geschichten, nie zweimal dieselbe.",
       f2h:"Natürliche Stimme",     f2p:"Audio-Erzählung in 10 Sprachen.",
       f3h:"10 Sprachen",           f3p:"Französisch, Englisch, Spanisch, Portugiesisch, Italienisch, Niederländisch, Deutsch, Arabisch, Türkisch, Polnisch.",
       f4h:"Für die ganze Familie", f4p:"Kinder von 3 bis 12 Jahren und Erwachsene.",
       f5h:"In Sekunden",           f5p:"Generiert und erzählt in unter 30 Sekunden.",
-      f6h:"Privat & sicher",       f6p:"Deine Geschichten werden nie gespeichert.",
-      how_h:"So funktioniert es", how_s:"3 Schritte, das ist alles",
+      f6h:"Persönliche Bibliothek",f6p:"Speichere deine Lieblingsgeschichten und höre sie jederzeit kostenlos erneut.",
+      how_h:"So funktioniert es", how_s:"4 Schritte, das ist alles",
       s1h:"Anpassen",    s1p:"Alter, Geschlecht, Thema, Sprache und Dauer.",
       s2h:"Generieren",  s2p:"KI erstellt eine einzigartige Geschichte in Sekunden.",
       s3h:"Zuhören",     s3p:"Die natürliche Stimme erzählt die Geschichte. Schließ die Augen.",
+      s4h:"Speichern",   s4p:"Speichere sie in deiner Bibliothek, um sie jederzeit kostenlos erneut zu hören.",
       sc_h:"Die App in Bildern", sc_s:"Einfach, schön, magisch",
       sc1:"Startbildschirm", sc1d:"Betritt das magische Atelier",
       sc2:"Einstellungen", sc2d:"Alter · Geschlecht · Thema · Sprache · Dauer", sc2b:"✨ Geschichte erstellen",
       sc3:"Wiedergabe", sc3d:"Erzählung läuft…",
-      sc_note:"* Illustrative Screenshots — lade die App herunter, um die echte Magie zu sehen",
+      sc_note:"* Illustrative Screenshots. Lade die App herunter, um die echte Magie zu sehen",
       pr_h:"Einfache Preise", pr_s:"Kostenlos starten, jederzeit aufladen",
       p0l:"Kostenlos", p0v:"Geschenk", p0s:"Bei der Anmeldung", p0n:"Testguthaben inklusive",
       p1l:"Starter", p1s:"Audio-Erzählung", p1n:"~6 Geschichten",
@@ -815,7 +827,7 @@
       p3l:"Premium", p3s:"Audio-Erzählung", p3n:"~36 Geschichten",
       dl_h:"Bereit für die erste Geschichte?", dl_p:"Kostenloser Download · Keine Karte erforderlich",
       ft_priv:"Datenschutzrichtlinie", ft_del:"Mein Konto löschen",
-      ft_contact:"Kontakt", ft_copy:`© ${YEAR} History Voice — BelgaCai`,
+      ft_contact:"Kontakt", ft_copy:`© ${YEAR} History Voice von BelgaCai`,
       play_locale:"de", page_title:"History Voice – KI-Geschichtengenerator für Kinder",
     },
     ar: {
@@ -829,21 +841,22 @@
       m2_l:"القصة جاهزة", m2_t:"قصة فريدة تُنشأ في ثوانٍ بالذكاء الاصطناعي", m2_b:"▶ استمع",
       m3_l:"رواية صوتية", m3_t:"صوت طبيعي بلغتك",
       feat_h:"كل ما تحتاجه", feat_s:"تطبيق مصمم للعائلات",
-      f1h:"ذكاء اصطناعي مبدع",  f1p:"قصص 100% أصيلة — لا تتكرر أبداً.",
+      f1h:"ذكاء اصطناعي مبدع",  f1p:"قصص 100% أصيلة، لا تتكرر أبداً.",
       f2h:"صوت طبيعي",           f2p:"رواية صوتية بـ 10 لغات.",
       f3h:"10 لغات",             f3p:"الفرنسية، الإنجليزية، الإسبانية، البرتغالية، الإيطالية، الهولندية، الألمانية، العربية، التركية، البولندية.",
       f4h:"للعائلة بأكملها",     f4p:"أطفال من 3 إلى 12 سنة والبالغون.",
       f5h:"في ثوانٍ",            f5p:"تُنشأ وتُروى في أقل من 30 ثانية.",
-      f6h:"خاص وآمن",            f6p:"قصصك لا تُخزَّن أبداً.",
-      how_h:"كيف يعمل", how_s:"3 خطوات فقط",
+      f6h:"مكتبة شخصية",         f6p:"احفظ قصصك المفضلة وأعد الاستماع إليها مجاناً، في أي وقت.",
+      how_h:"كيف يعمل", how_s:"4 خطوات فقط",
       s1h:"تخصيص",  s1p:"العمر والجنس والموضوع واللغة والمدة.",
       s2h:"إنشاء",  s2p:"الذكاء الاصطناعي ينشئ قصة فريدة في ثوانٍ.",
       s3h:"استماع", s3p:"الصوت الطبيعي يروي القصة. أغمض عينيك.",
+      s4h:"حفظ",    s4p:"احفظها في مكتبتك لإعادة الاستماع إليها مجاناً في أي وقت.",
       sc_h:"التطبيق بالصور", sc_s:"بسيط، جميل، سحري",
       sc1:"الشاشة الرئيسية", sc1d:"ادخل إلى الورشة السحرية",
       sc2:"الإعدادات", sc2d:"العمر · الجنس · الموضوع · اللغة · المدة", sc2b:"✨ إنشاء القصة",
       sc3:"التشغيل", sc3d:"الرواية جارية…",
-      sc_note:"* لقطات توضيحية — حمّل التطبيق لرؤية السحر الحقيقي",
+      sc_note:"* لقطات توضيحية. حمّل التطبيق لرؤية السحر الحقيقي",
       pr_h:"أسعار بسيطة", pr_s:"ابدأ مجاناً، اشحن متى تشاء",
       p0l:"مجاني", p0v:"هدية", p0s:"عند التسجيل", p0n:"رصيد تجريبي مشمول",
       p1l:"مبتدئ", p1s:"من الرواية الصوتية", p1n:"~6 قصص",
@@ -851,7 +864,7 @@
       p3l:"مميز", p3s:"من الرواية الصوتية", p3n:"~36 قصة",
       dl_h:"هل أنت مستعد للقصة الأولى؟", dl_p:"تحميل مجاني · لا بطاقة مطلوبة",
       ft_priv:"سياسة الخصوصية", ft_del:"حذف حسابي",
-      ft_contact:"تواصل", ft_copy:`© ${YEAR} History Voice — BelgaCai`,
+      ft_contact:"تواصل", ft_copy:`© ${YEAR} History Voice بواسطة BelgaCai`,
       play_locale:"ar", page_title:"History Voice – مولّد قصص الذكاء الاصطناعي للأطفال",
     },
     tr: {
@@ -865,21 +878,22 @@
       m2_l:"Hikaye oluşturuldu", m2_t:"Yapay zeka ile saniyeler içinde benzersiz bir hikaye", m2_b:"▶ Dinle",
       m3_l:"Sesli anlatım", m3_t:"Dilinde doğal ses",
       feat_h:"İhtiyacın olan her şey", feat_s:"Aileler için tasarlanmış uygulama",
-      f1h:"Yaratıcı Yapay Zeka", f1p:"100% özgün hikayeler — asla aynı ikisi yok.",
+      f1h:"Yaratıcı Yapay Zeka", f1p:"100% özgün hikayeler, asla aynı ikisi yok.",
       f2h:"Doğal ses",           f2p:"10 dilde sesli anlatım.",
       f3h:"10 dil",              f3p:"Fransızca, İngilizce, İspanyolca, Portekizce, İtalyanca, Hollandaca, Almanca, Arapça, Türkçe, Lehçe.",
       f4h:"Tüm aile için",       f4p:"3-12 yaş çocuklar ve yetişkinler.",
       f5h:"Saniyeler içinde",    f5p:"30 saniyeden kısa sürede oluşturulur ve anlatılır.",
-      f6h:"Özel ve güvenli",     f6p:"Hikayeleriniz hiç saklanmaz.",
-      how_h:"Nasıl çalışır", how_s:"3 adım, hepsi bu",
+      f6h:"Kişisel kitaplık",    f6p:"Favori hikayelerinizi kaydedin ve istediğiniz zaman ücretsiz olarak yeniden dinleyin.",
+      how_h:"Nasıl çalışır", how_s:"4 adım, hepsi bu",
       s1h:"Kişiselleştir", s1p:"Yaş, cinsiyet, tema, dil ve süre.",
       s2h:"Oluştur",       s2p:"Yapay zeka saniyeler içinde benzersiz bir hikaye oluşturur.",
       s3h:"Dinle",         s3p:"Doğal ses hikayeyi anlatır. Gözlerini kapat.",
+      s4h:"Kaydet",        s4p:"İstediğiniz zaman ücretsiz dinlemek için kitaplığınızda saklayın.",
       sc_h:"Uygulama görüntüleri", sc_s:"Basit, güzel, sihirli",
       sc1:"Ana ekran", sc1d:"Sihirli atölyeye gir",
       sc2:"Ayarlar", sc2d:"Yaş · Cinsiyet · Tema · Dil · Süre", sc2b:"✨ Hikaye oluştur",
       sc3:"Oynatma", sc3d:"Anlatım devam ediyor…",
-      sc_note:"* İllüstratif ekran görüntüleri — gerçek sihri görmek için uygulamayı indir",
+      sc_note:"* İllüstratif ekran görüntüleri. Gerçek sihri görmek için uygulamayı indir",
       pr_h:"Basit fiyatlar", pr_s:"Ücretsiz başla, istediğinde şarj et",
       p0l:"Ücretsiz", p0v:"Hediye", p0s:"Kayıt olunca", p0n:"Deneme kredisi dahil",
       p1l:"Başlangıç", p1s:"Sesli anlatım", p1n:"~6 hikaye",
@@ -887,7 +901,7 @@
       p3l:"Premium", p3s:"Sesli anlatım", p3n:"~36 hikaye",
       dl_h:"İlk hikaye için hazır mısın?", dl_p:"Ücretsiz indirme · Kart gerekmez",
       ft_priv:"Gizlilik politikası", ft_del:"Hesabımı sil",
-      ft_contact:"İletişim", ft_copy:`© ${YEAR} History Voice — BelgaCai`,
+      ft_contact:"İletişim", ft_copy:`© ${YEAR} History Voice, BelgaCai tarafından`,
       play_locale:"tr", page_title:"History Voice – Çocuklar için Yapay Zeka Hikaye Üreticisi",
     },
     pl: {
@@ -901,21 +915,22 @@
       m2_l:"Historia gotowa", m2_t:"Unikalna historia stworzona w sekundach przez AI", m2_b:"▶ Słuchaj",
       m3_l:"Narracja głosowa", m3_t:"Naturalny głos w twoim języku",
       feat_h:"Wszystko czego potrzebujesz", feat_s:"Aplikacja zaprojektowana dla rodzin",
-      f1h:"Kreatywna AI",         f1p:"100% oryginalne historie — nigdy dwa razy to samo.",
+      f1h:"Kreatywna AI",         f1p:"100% oryginalne historie, nigdy dwa razy to samo.",
       f2h:"Naturalny głos",       f2p:"Narracja audio w 10 językach.",
       f3h:"10 języków",           f3p:"Francuski, Angielski, Hiszpański, Portugalski, Włoski, Niderlandzki, Niemiecki, Arabski, Turecki, Polski.",
       f4h:"Dla całej rodziny",    f4p:"Dzieci od 3 do 12 lat i dorośli.",
       f5h:"W kilka sekund",       f5p:"Wygenerowana i narrowana w mniej niż 30 sekund.",
-      f6h:"Prywatne i bezpieczne",f6p:"Twoje historie nigdy nie są przechowywane.",
-      how_h:"Jak to działa", how_s:"3 kroki, to wszystko",
+      f6h:"Osobista biblioteka", f6p:"Zapisuj swoje ulubione historie i słuchaj ich ponownie za darmo, kiedy chcesz.",
+      how_h:"Jak to działa", how_s:"4 kroki, to wszystko",
       s1h:"Personalizuj", s1p:"Wiek, płeć, temat, język i czas trwania.",
       s2h:"Generuj",      s2p:"AI tworzy unikalną historię w kilka sekund.",
       s3h:"Słuchaj",      s3p:"Naturalny głos opowiada historię. Zamknij oczy.",
+      s4h:"Zapisz",       s4p:"Zachowaj ją w swojej bibliotece, aby odsłuchać ją ponownie za darmo.",
       sc_h:"Aplikacja w obrazach", sc_s:"Prosta, piękna, magiczna",
       sc1:"Ekran główny", sc1d:"Wejdź do magicznego warsztatu",
       sc2:"Ustawienia", sc2d:"Wiek · Płeć · Temat · Język · Czas", sc2b:"✨ Stwórz historię",
       sc3:"Odtwarzanie", sc3d:"Narracja w toku…",
-      sc_note:"* Ilustracyjne zrzuty ekranu — pobierz aplikację, aby zobaczyć prawdziwą magię",
+      sc_note:"* Ilustracyjne zrzuty ekranu. Pobierz aplikację, aby zobaczyć prawdziwą magię",
       pr_h:"Proste ceny", pr_s:"Zacznij za darmo, doładuj kiedy chcesz",
       p0l:"Darmowy", p0v:"Prezent", p0s:"Przy rejestracji", p0n:"Kredyty próbne w zestawie",
       p1l:"Starter", p1s:"Narracji audio", p1n:"~6 historii",
@@ -923,7 +938,7 @@
       p3l:"Premium", p3s:"Narracji audio", p3n:"~36 historii",
       dl_h:"Gotowy na pierwszą historię?", dl_p:"Darmowe pobieranie · Karta nie wymagana",
       ft_priv:"Polityka prywatności", ft_del:"Usuń moje konto",
-      ft_contact:"Kontakt", ft_copy:`© ${YEAR} History Voice — BelgaCai`,
+      ft_contact:"Kontakt", ft_copy:`© ${YEAR} History Voice przez BelgaCai`,
       play_locale:"pl", page_title:"History Voice – Generator Historii AI dla Dzieci",
     },
   };

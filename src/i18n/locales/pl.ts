@@ -44,11 +44,36 @@ export default {
   recharge_popular: 'POPULARNE',
   recharge_buy: 'Kup',
   recharge_info: 'Kredyty są dodawane natychmiast po płatności. Zakupy są zarządzane przez Google Play.',
+  recharge_premium_included: 'Premium: {{days}} dni bez reklam · biblioteka na 20 historii',
   recharge_success_title: 'Dziękujemy!',
   recharge_success_message: 'Twoje kredyty zostały pomyślnie dodane.',
   recharge_error_title: 'Błąd',
   recharge_error_unavailable: 'Ten pakiet jest chwilowo niedostępny.',
   recharge_error_purchase: 'Wystąpił błąd podczas zakupu. Spróbuj ponownie.',
+
+  // Biblioteka
+  library_title: 'Biblioteka',
+  library_count: '{{count}}/{{limit}} zapisanych historii',
+  library_empty: 'Brak zapisanych historii. Wygeneruj historię i dotknij "Zapisz", aby znaleźć ją tutaj.',
+  library_save: 'Zapisz',
+  library_saved: 'Zapisano ✓',
+  library_delete_title: 'Usunąć tę historię?',
+  library_delete_confirm: 'Tej czynności nie można cofnąć.',
+  library_delete: 'Usuń',
+  library_limit_title: 'Biblioteka pełna',
+  library_limit_message: 'Osiągnięto limit 3 zapisanych historii. Przejdź na wersję premium, aby zapisywać do 20.',
+  library_limit_cta: 'Zobacz premium',
+  library_limit_message_premium: 'Osiągnięto limit 20 zapisanych historii. Usuń jedną, aby dodać nową.',
+  library_limit_cta_premium: 'Zobacz moją bibliotekę',
+  library_premium_promo: 'Przejdź na wersję premium, aby zapisywać do 20 historii (zamiast 3).',
+
+  // Przypomnienie o bajce
+  notif_section_title: 'Przypomnienie o bajce',
+  notif_heure_label: 'Godzina',
+  notif_titre: '🌙 Czas na bajkę',
+  notif_message: 'Czas stworzyć nową bajkę na dobranoc!',
+  notif_message_sans_credits: 'Kup kredyty, aby kontynuować swoje bajki!',
+  notif_permission_refusee: 'Musisz zezwolić na powiadomienia w ustawieniach telefonu, aby włączyć to przypomnienie.',
 
   // Messages
   msg_histoire_prete: 'Historia jest gotowa!',

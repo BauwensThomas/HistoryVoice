@@ -44,11 +44,36 @@ export default {
   recharge_popular: 'BELIEBT',
   recharge_buy: 'Kaufen',
   recharge_info: 'Credits werden sofort nach der Zahlung hinzugefügt. Käufe werden über Google Play abgewickelt.',
+  recharge_premium_included: 'Premium: {{days}} Tage werbefrei · Bibliothek für 20 Geschichten',
   recharge_success_title: 'Danke!',
   recharge_success_message: 'Deine Credits wurden erfolgreich hinzugefügt.',
   recharge_error_title: 'Fehler',
   recharge_error_unavailable: 'Dieses Paket ist momentan nicht verfügbar.',
   recharge_error_purchase: 'Beim Kauf ist ein Fehler aufgetreten. Bitte versuche es erneut.',
+
+  // Bibliothek
+  library_title: 'Bibliothek',
+  library_count: '{{count}}/{{limit}} gespeicherte Geschichten',
+  library_empty: 'Noch keine gespeicherten Geschichten. Generiere eine Geschichte und tippe auf "Speichern", um sie hier wiederzufinden.',
+  library_save: 'Speichern',
+  library_saved: 'Gespeichert ✓',
+  library_delete_title: 'Diese Geschichte löschen?',
+  library_delete_confirm: 'Diese Aktion kann nicht rückgängig gemacht werden.',
+  library_delete: 'Löschen',
+  library_limit_title: 'Bibliothek voll',
+  library_limit_message: 'Du hast das Limit von 3 gespeicherten Geschichten erreicht. Werde Premium, um bis zu 20 zu speichern.',
+  library_limit_cta: 'Premium ansehen',
+  library_limit_message_premium: 'Du hast das Limit von 20 gespeicherten Geschichten erreicht. Lösche eine, um eine neue hinzuzufügen.',
+  library_limit_cta_premium: 'Meine Bibliothek ansehen',
+  library_premium_promo: 'Werde Premium, um bis zu 20 Geschichten zu speichern (statt 3).',
+
+  // Erinnerung Gute-Nacht-Geschichte
+  notif_section_title: 'Erinnerung Gute-Nacht-Geschichte',
+  notif_heure_label: 'Uhrzeit',
+  notif_titre: '🌙 Geschichtenzeit',
+  notif_message: 'Zeit für eine neue Gute-Nacht-Geschichte!',
+  notif_message_sans_credits: 'Kaufe Credits, um deine Geschichten fortzusetzen!',
+  notif_permission_refusee: 'Du musst Benachrichtigungen in den Telefoneinstellungen erlauben, um diese Erinnerung zu aktivieren.',
 
   // Messages
   msg_histoire_prete: 'Die Geschichte ist fertig!',

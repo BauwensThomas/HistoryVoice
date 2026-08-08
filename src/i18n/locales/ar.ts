@@ -44,11 +44,36 @@ export default {
   recharge_popular: 'الأكثر شيوعاً',
   recharge_buy: 'شراء',
   recharge_info: 'يُضاف الرصيد فور إتمام الدفع. تُدار عمليات الشراء عبر Google Play.',
+  recharge_premium_included: 'مميز: {{days}} يومًا بدون إعلانات · مكتبة لـ 20 قصة',
   recharge_success_title: 'شكراً!',
   recharge_success_message: 'تمت إضافة رصيدك بنجاح.',
   recharge_error_title: 'خطأ',
   recharge_error_unavailable: 'هذه الباقة غير متوفرة حالياً.',
   recharge_error_purchase: 'حدث خطأ أثناء الشراء. يرجى المحاولة مرة أخرى.',
+
+  // المكتبة
+  library_title: 'المكتبة',
+  library_count: '{{count}}/{{limit}} قصص محفوظة',
+  library_empty: 'لا توجد قصص محفوظة بعد. أنشئ قصة واضغط على "حفظ" لتجدها هنا.',
+  library_save: 'حفظ',
+  library_saved: 'محفوظة ✓',
+  library_delete_title: 'حذف هذه القصة؟',
+  library_delete_confirm: 'لا يمكن التراجع عن هذا الإجراء.',
+  library_delete: 'حذف',
+  library_limit_title: 'المكتبة ممتلئة',
+  library_limit_message: 'لقد وصلت إلى الحد الأقصى وهو 3 قصص محفوظة. اشترك في النسخة المميزة لحفظ حتى 20 قصة.',
+  library_limit_cta: 'عرض النسخة المميزة',
+  library_limit_message_premium: 'لقد وصلت إلى الحد الأقصى وهو 20 قصة محفوظة. احذف واحدة لإضافة قصة جديدة.',
+  library_limit_cta_premium: 'عرض مكتبتي',
+  library_premium_promo: 'اشترك في النسخة المميزة لحفظ حتى 20 قصة (بدلاً من 3).',
+
+  // تذكير القصة
+  notif_section_title: 'تذكير القصة',
+  notif_heure_label: 'الوقت',
+  notif_titre: '🌙 وقت القصة',
+  notif_message: 'حان وقت إنشاء قصة جديدة قبل النوم!',
+  notif_message_sans_credits: 'اشترِ رصيدًا لمواصلة قصصك!',
+  notif_permission_refusee: 'يجب عليك السماح بالإشعارات في إعدادات هاتفك لتفعيل هذا التذكير.',
 
   // Messages
   msg_histoire_prete: 'القصة جاهزة!',

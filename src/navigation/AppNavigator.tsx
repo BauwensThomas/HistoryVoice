@@ -8,20 +8,38 @@ import MainScreen from '../screens/MainScreen';
 import StoryScreen from '../screens/StoryScreen';
 import RechargeScreen from '../screens/RechargeScreen';
 import PrivacyPolicyScreen from '../screens/PrivacyPolicyScreen';
+import LibraryScreen from '../screens/LibraryScreen';
 
 export type RootStackParamList = {
   Splash: undefined;
   Home: undefined;
   Login: undefined;
   Main: undefined;
-  Story: {
-    histoireGeneree: string;
-    audioFilePath: string;
-    showReviewModal: boolean;
-    reviewTotal: number;
-  };
+  Story:
+    | {
+        mode: 'new';
+        histoireGeneree: string;
+        audioFilePath: string;
+        showReviewModal: boolean;
+        reviewTotal: number;
+        age: number;
+        ageLabel: string;
+        sexe: string;
+        genre: string;
+        moment: string;
+        dureeSecondes: number;
+        langueId: string;
+        voixId: 'male' | 'female';
+        description: string;
+      }
+    | {
+        mode: 'saved';
+        histoireGeneree: string;
+        audioUrl: string;
+      };
   Recharge: undefined;
   PrivacyPolicy: undefined;
+  Library: undefined;
 };
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
@@ -42,6 +60,7 @@ export default function AppNavigator() {
         <Stack.Screen name="Story" component={StoryScreen} />
         <Stack.Screen name="Recharge" component={RechargeScreen} />
         <Stack.Screen name="PrivacyPolicy" component={PrivacyPolicyScreen} />
+        <Stack.Screen name="Library" component={LibraryScreen} />
       </Stack.Navigator>
     </NavigationContainer>
   );

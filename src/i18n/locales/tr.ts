@@ -44,11 +44,36 @@ export default {
   recharge_popular: 'POPÜLER',
   recharge_buy: 'Satın al',
   recharge_info: 'Krediler ödeme sonrasında anında eklenir. Satın almalar Google Play tarafından yönetilir.',
+  recharge_premium_included: 'Premium: {{days}} gün reklamsız · 20 hikayelik kitaplık',
   recharge_success_title: 'Teşekkürler!',
   recharge_success_message: 'Kredileriniz başarıyla eklendi.',
   recharge_error_title: 'Hata',
   recharge_error_unavailable: 'Bu paket şu an mevcut değil.',
   recharge_error_purchase: 'Satın alma sırasında bir hata oluştu. Lütfen tekrar deneyin.',
+
+  // Kitaplık
+  library_title: 'Kitaplık',
+  library_count: '{{count}}/{{limit}} kaydedilen hikaye',
+  library_empty: 'Henüz kaydedilmiş hikaye yok. Bir hikaye oluşturun ve burada bulmak için "Kaydet"e dokunun.',
+  library_save: 'Kaydet',
+  library_saved: 'Kaydedildi ✓',
+  library_delete_title: 'Bu hikaye silinsin mi?',
+  library_delete_confirm: 'Bu işlem geri alınamaz.',
+  library_delete: 'Sil',
+  library_limit_title: 'Kitaplık dolu',
+  library_limit_message: '3 kaydedilen hikaye sınırına ulaştınız. 20\'ye kadar kaydetmek için premium olun.',
+  library_limit_cta: 'Premium\'u gör',
+  library_limit_message_premium: '20 kaydedilen hikaye sınırına ulaştınız. Yeni bir tane eklemek için birini silin.',
+  library_limit_cta_premium: 'Kitaplığımı gör',
+  library_premium_promo: '20\'ye kadar hikaye kaydetmek için premium olun (3 yerine).',
+
+  // Hikaye hatırlatıcısı
+  notif_section_title: 'Hikaye hatırlatıcısı',
+  notif_heure_label: 'Saat',
+  notif_titre: '🌙 Hikaye zamanı',
+  notif_message: 'Yeni bir uyku hikayesi oluşturma zamanı!',
+  notif_message_sans_credits: 'Hikayelerinize devam etmek için kredi satın alın!',
+  notif_permission_refusee: 'Bu hatırlatıcıyı etkinleştirmek için telefon ayarlarınızdan bildirimlere izin vermeniz gerekir.',
 
   // Messages
   msg_histoire_prete: 'Hikaye hazır!',

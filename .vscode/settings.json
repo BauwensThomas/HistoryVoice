@@ -8,5 +8,6 @@
     "java.import.exclusions": [
         "**/node_modules/**"
     ],
+    "java.import.gradle.enabled": false,
     "gradle.autoDetect": "off"
 }

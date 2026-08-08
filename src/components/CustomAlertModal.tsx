@@ -15,7 +15,7 @@ interface ModalButton {
 
 interface CustomAlertModalProps {
   visible: boolean;
-  icon?: string;
+  icon?: React.ReactNode;
   title: string;
   message: string;
   primaryButton: ModalButton;
@@ -34,7 +34,13 @@ export default function CustomAlertModal({
     <Modal visible={visible} transparent animationType="fade">
       <View style={styles.overlay}>
         <View style={styles.card}>
-          {icon ? <Text style={styles.icon}>{icon}</Text> : null}
+          {icon ? (
+            typeof icon === 'string' ? (
+              <Text style={styles.icon}>{icon}</Text>
+            ) : (
+              <View style={styles.iconWrapper}>{icon}</View>
+            )
+          ) : null}
           <Text style={styles.title}>{title}</Text>
           <Text style={styles.message}>{message}</Text>
           <View style={styles.buttons}>
@@ -76,6 +82,10 @@ const styles = StyleSheet.create({
   icon: {
     fontSize: 40,
     marginBottom: 12,
+  },
+  iconWrapper: {
+    marginBottom: 12,
+    alignItems: 'center',
   },
   title: {
     fontSize: 18,

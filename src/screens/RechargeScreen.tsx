@@ -11,8 +11,10 @@ import { useTranslation } from 'react-i18next';
 import { Colors } from '../theme/colors';
 import AnimatedBackground from '../components/AnimatedBackground';
 import CustomAlertModal from '../components/CustomAlertModal';
+import AdBanner from '../components/AdBanner';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import Purchases, { PurchasesPackage } from 'react-native-purchases';
+import { chargerStatutPremium } from '../services/supabaseService';
 import type { NativeStackNavigationProp } from '@react-navigation/native-stack';
 import type { RootStackParamList } from '../navigation/AppNavigator';
 
@@ -28,6 +30,7 @@ const PACKS = [
     priceKey: 'recharge_price_starter',
     nameKey: 'recharge_pack_starter',
     color: '#4CAF50',
+    premiumDays: 30,
   },
   {
     id: 'standard_25min',
@@ -36,6 +39,7 @@ const PACKS = [
     nameKey: 'recharge_pack_standard',
     color: '#2196F3',
     popular: true,
+    premiumDays: 60,
   },
   {
     id: 'premium_60min',
@@ -43,6 +47,7 @@ const PACKS = [
     priceKey: 'recharge_price_premium',
     nameKey: 'recharge_pack_premium',
     color: '#9C27B0',
+    premiumDays: 90,
   },
 ];
 
@@ -55,10 +60,12 @@ export default function RechargeScreen({ navigation }: RechargeScreenProps) {
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [showErrorModal, setShowErrorModal] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const [isPremium, setIsPremium] = useState(false);
 
   // Charger les offres RevenueCat
   useEffect(() => {
     loadOfferings();
+    chargerStatutPremium().then(setIsPremium);
   }, []);
 
   const loadOfferings = async () => {
@@ -162,6 +169,12 @@ export default function RechargeScreen({ navigation }: RechargeScreenProps) {
                   {getPrice(pack.id, pack.priceKey)}
                 </Text>
 
+                <View style={[styles.premiumBadge, { borderColor: pack.color }]}>
+                  <Text style={[styles.premiumBadgeText, { color: pack.color }]}>
+                    {t('recharge_premium_included', { days: pack.premiumDays })}
+                  </Text>
+                </View>
+
                 {purchasing === pack.id ? (
                   <ActivityIndicator size="small" color={pack.color} style={{ marginTop: 12 }} />
                 ) : (
@@ -176,6 +189,11 @@ export default function RechargeScreen({ navigation }: RechargeScreenProps) {
 
         {/* Info */}
         <Text style={styles.infoText}>{t('recharge_info')}</Text>
+
+        {/* Pub bandeau */}
+        <View style={styles.adWrapper}>
+          <AdBanner isPremium={isPremium} />
+        </View>
       </ScrollView>
 
       <CustomAlertModal
@@ -287,6 +305,21 @@ const styles = StyleSheet.create({
     fontSize: 15,
     fontWeight: 'bold',
     marginTop: 1,
+  },
+  premiumBadge: {
+    marginTop: 8,
+    paddingHorizontal: 10,
+    paddingVertical: 4,
+    borderRadius: 12,
+    borderWidth: 1,
+  },
+  premiumBadgeText: {
+    fontSize: 11,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  adWrapper: {
+    marginTop: 20,
   },
   buyButton: {
     marginTop: 6,
