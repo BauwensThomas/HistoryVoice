@@ -65,6 +65,11 @@ export default {
   notif_message: '¡Es hora de crear un nuevo cuento para dormir!',
   notif_message_sans_credits: '¡Compra créditos para seguir creando tus cuentos!',
   notif_permission_refusee: 'Debes permitir las notificaciones en los ajustes de tu teléfono para activar este recordatorio.',
+
+  // Actualización obligatoria
+  update_required_title: 'Actualización disponible',
+  update_required_message: 'Hay una nueva versión de History Voice disponible. Actualiza la app para continuar.',
+  update_required_cta: 'Actualizar',
   // Privacy
   website_link: 'Sitio web',
   privacy_link: 'Política de privacidad',
@@ -131,6 +136,6 @@ export default {
   langues: ['Francés', 'Inglés', 'Italiano', 'Español', 'Portugués (BR)', 'Holandés', 'Alemán', 'Árabe', 'Turco', 'Polaco'],
   durees: ['1 min', '2 min', '3 min', '4 min'],
   moments: ['Historia de día', 'Historia de noche'],
-  genres: ['Aventura', 'Fantasía', 'Animales', 'Príncipe / Princesa', 'Ciencia ficción', 'Terror', 'Policíaco', 'Comedia'],
+  genres: ['Aventura', 'Fantasía', 'Animales', 'Príncipe / Princesa', 'Ciencia ficción', 'Comedia'],
   voix: ['Mujer', 'Hombre'],
 };

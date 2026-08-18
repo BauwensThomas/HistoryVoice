@@ -65,6 +65,11 @@ export default {
   notif_message: 'Tijd om een nieuw verhaaltje voor het slapengaan te maken!',
   notif_message_sans_credits: 'Koop tegoed om je verhalen voort te zetten!',
   notif_permission_refusee: 'Je moet meldingen toestaan in je telefooninstellingen om deze herinnering te activeren.',
+
+  // Verplichte update
+  update_required_title: 'Update beschikbaar',
+  update_required_message: 'Er is een nieuwe versie van History Voice beschikbaar. Werk de app bij om door te gaan.',
+  update_required_cta: 'Bijwerken',
   // Privacy
   website_link: 'Website',
   privacy_link: 'Privacybeleid',
@@ -131,6 +136,6 @@ export default {
   langues: ['Frans', 'Engels', 'Italiaans', 'Spaans', 'Portugees (BR)', 'Nederlands', 'Duits', 'Arabisch', 'Turks', 'Pools'],
   durees: ['1 min', '2 min', '3 min', '4 min'],
   moments: ['Dagverhaal', 'Nachtverhaal'],
-  genres: ['Avontuur', 'Fantasie', 'Dieren', 'Prins / Prinses', 'Sciencefiction', 'Horror', 'Detective', 'Komedie'],
+  genres: ['Avontuur', 'Fantasie', 'Dieren', 'Prins / Prinses', 'Sciencefiction', 'Komedie'],
   voix: ['Vrouw', 'Man'],
 };

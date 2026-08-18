@@ -75,6 +75,11 @@ export default {
   notif_message_sans_credits: 'Kaufe Credits, um deine Geschichten fortzusetzen!',
   notif_permission_refusee: 'Du musst Benachrichtigungen in den Telefoneinstellungen erlauben, um diese Erinnerung zu aktivieren.',
 
+  // Pflicht-Update
+  update_required_title: 'Update verfügbar',
+  update_required_message: 'Eine neue Version von History Voice ist verfügbar. Bitte aktualisiere die App, um fortzufahren.',
+  update_required_cta: 'Aktualisieren',
+
   // Messages
   msg_histoire_prete: 'Die Geschichte ist fertig!',
   msg_erreur_audio: 'Audio-Fehler',
@@ -147,6 +152,6 @@ export default {
   langues: ['Französisch', 'Englisch', 'Italienisch', 'Spanisch', 'Portugiesisch (BR)', 'Niederländisch', 'Deutsch', 'Arabisch', 'Türkisch', 'Polnisch'],
   durees: ['1 Min', '2 Min', '3 Min', '4 Min'],
   moments: ['Tagesgeschichte', 'Nachtgeschichte'],
-  genres: ['Abenteuer', 'Fantasy', 'Tiere', 'Prinz / Prinzessin', 'Science-Fiction', 'Horror', 'Krimi', 'Komödie'],
+  genres: ['Abenteuer', 'Fantasy', 'Tiere', 'Prinz / Prinzessin', 'Science-Fiction', 'Komödie'],
   voix: ['Frau', 'Mann'],
 };

@@ -75,6 +75,11 @@ export default {
   notif_message_sans_credits: 'Buy credits to keep creating your bedtime stories!',
   notif_permission_refusee: 'You need to allow notifications in your phone settings to enable this reminder.',
 
+  // Mandatory update
+  update_required_title: 'Update available',
+  update_required_message: 'A new version of History Voice is available. Please update the app to continue.',
+  update_required_cta: 'Update',
+
   // Messages
   msg_histoire_prete: 'The story is ready!',
   msg_erreur_audio: 'Audio error',
@@ -147,6 +152,6 @@ export default {
   langues: ['French', 'English', 'Italian', 'Spanish', 'Portuguese (BR)', 'Dutch', 'German', 'Arabic', 'Turkish', 'Polish'],
   durees: ['1 min', '2 min', '3 min', '4 min'],
   moments: ['Daytime Story', 'Nighttime Story'],
-  genres: ['Adventure', 'Fantasy', 'Animals', 'Prince / Princess', 'Science fiction', 'Horror', 'Detective', 'Comedy'],
+  genres: ['Adventure', 'Fantasy', 'Animals', 'Prince / Princess', 'Science fiction', 'Comedy'],
   voix: ['Woman', 'Man'],
 };

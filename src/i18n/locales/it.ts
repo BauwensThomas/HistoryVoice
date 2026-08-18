@@ -65,6 +65,11 @@ export default {
   notif_message: 'È il momento di creare una nuova storia della buonanotte!',
   notif_message_sans_credits: 'Acquista crediti per continuare le tue storie!',
   notif_permission_refusee: 'Devi consentire le notifiche nelle impostazioni del telefono per attivare questo promemoria.',
+
+  // Aggiornamento obbligatorio
+  update_required_title: 'Aggiornamento disponibile',
+  update_required_message: 'È disponibile una nuova versione di History Voice. Aggiorna l\'app per continuare.',
+  update_required_cta: 'Aggiorna',
   // Privacy
   website_link: 'Sito web',
   privacy_link: 'Informativa sulla privacy',
@@ -131,6 +136,6 @@ export default {
   langues: ['Francese', 'Inglese', 'Italiano', 'Spagnolo', 'Portoghese (BR)', 'Olandese', 'Tedesco', 'Arabo', 'Turco', 'Polacco'],
   durees: ['1 min', '2 min', '3 min', '4 min'],
   moments: ['Storia di giorno', 'Storia di notte'],
-  genres: ['Avventura', 'Fantasy', 'Animali', 'Principe / Principessa', 'Fantascienza', 'Orrore', 'Poliziesco', 'Commedia'],
+  genres: ['Avventura', 'Fantasy', 'Animali', 'Principe / Principessa', 'Fantascienza', 'Commedia'],
   voix: ['Donna', 'Uomo'],
 };

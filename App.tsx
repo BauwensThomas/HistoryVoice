@@ -8,8 +8,10 @@ import React, { useEffect, useState } from 'react';
 import { StatusBar, View, ActivityIndicator, Platform, I18nManager } from 'react-native';
 import { SafeAreaProvider } from 'react-native-safe-area-context';
 import AppNavigator from './src/navigation/AppNavigator';
+import UpdateRequiredScreen from './src/screens/UpdateRequiredScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { loadCalibration } from './src/services/calibrationStore';
+import { isUpdateRequired } from './src/services/versionCheckService';
 import Purchases from 'react-native-purchases';
 import mobileAds, { AdsConsent, MaxAdContentRating } from 'react-native-google-mobile-ads';
 
@@ -37,32 +39,44 @@ const REVENUECAT_API_KEY = Platform.select({
 
 function App() {
   const [ready, setReady] = useState(false);
+  const [updateRequired, setUpdateRequired] = useState(false);
 
   useEffect(() => {
-    // Initialiser RevenueCat
-    Purchases.configure({ apiKey: REVENUECAT_API_KEY });
+    isUpdateRequired().then(required => {
+      if (required) {
+        setUpdateRequired(true);
+        return;
+      }
 
-    // Consentement RGPD (UMP) : à demander à chaque lancement avant d'initialiser les pubs.
-    // En cas d'échec de la collecte, on retombe sur le consentement de la session précédente
-    // (getConsentInfo), comme recommandé par la doc react-native-google-mobile-ads.
-    AdsConsent.gatherConsent()
-      .catch(error => console.error('Consentement pubs : échec de la collecte', error))
-      .finally(async () => {
-        const { canRequestAds } = await AdsConsent.getConsentInfo();
-        if (!canRequestAds) return;
+      // Initialiser RevenueCat
+      Purchases.configure({ apiKey: REVENUECAT_API_KEY });
 
-        // App à cible mixte (inclut des enfants) → pubs non personnalisées et
-        // contenu limité au classement G, obligatoire côté Google Play/AdMob.
-        await mobileAds().setRequestConfiguration({
-          maxAdContentRating: MaxAdContentRating.G,
-          tagForChildDirectedTreatment: true,
-          tagForUnderAgeOfConsent: true,
+      // Consentement RGPD (UMP) : à demander à chaque lancement avant d'initialiser les pubs.
+      // En cas d'échec de la collecte, on retombe sur le consentement de la session précédente
+      // (getConsentInfo), comme recommandé par la doc react-native-google-mobile-ads.
+      AdsConsent.gatherConsent()
+        .catch(error => console.error('Consentement pubs : échec de la collecte', error))
+        .finally(async () => {
+          const { canRequestAds } = await AdsConsent.getConsentInfo();
+          if (!canRequestAds) return;
+
+          // App à cible mixte (inclut des enfants) → pubs non personnalisées et
+          // contenu limité au classement G, obligatoire côté Google Play/AdMob.
+          await mobileAds().setRequestConfiguration({
+            maxAdContentRating: MaxAdContentRating.G,
+            tagForChildDirectedTreatment: true,
+            tagForUnderAgeOfConsent: true,
+          });
+          await mobileAds().initialize();
         });
-        await mobileAds().initialize();
-      });
 
-    loadCalibration().then(() => setReady(true));
+      loadCalibration().then(() => setReady(true));
+    });
   }, []);
+
+  if (updateRequired) {
+    return <UpdateRequiredScreen />;
+  }
 
   if (!ready) {
     return (

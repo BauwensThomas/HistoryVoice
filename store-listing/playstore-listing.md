@@ -32,7 +32,7 @@ Fonctionnalités :
 • Histoires générées par IA, uniques à chaque fois
 • Lecture audio avec voix naturelle (homme ou femme)
 • Adapté à tous les âges : de 2 ans à l'âge adulte
-• 8 genres : Aventure, Fantastique, Animaux, Prince / Princesse, Science-fiction, Horreur, Policier, Comédie
+• 6 genres : Aventure, Fantastique, Animaux, Prince / Princesse, Science-fiction, Comédie
 • Histoires de jour ou de nuit
 • 10 langues : Français, Anglais, Italien, Espagnol, Portugais, Néerlandais, Allemand, Arabe, Turc, Polonais
 • Durée ajustable : 1 à 4 minutes
@@ -73,7 +73,7 @@ Features:
 • AI-generated stories, unique every time
 • Natural voice narration (male or female)
 • For all ages: from 2 years old to adults
-• 8 genres: Adventure, Fantasy, Animals, Prince / Princess, Science Fiction, Horror, Detective, Comedy
+• 6 genres: Adventure, Fantasy, Animals, Prince / Princess, Science Fiction, Comedy
 • Daytime or nighttime stories
 • 10 languages: French, English, Italian, Spanish, Portuguese, Dutch, German, Arabic, Turkish, Polish
 • Adjustable length: 1 to 4 minutes
@@ -114,7 +114,7 @@ Funciones:
 • Cuentos generados por IA, únicos cada vez
 • Narración con voz natural (femenina o masculina)
 • Para todas las edades: desde los 2 años hasta adultos
-• 8 géneros: Aventura, Fantasía, Animales, Príncipe / Princesa, Ciencia ficción, Terror, Policíaco, Comedia
+• 6 géneros: Aventura, Fantasía, Animales, Príncipe / Princesa, Ciencia ficción, Comedia
 • Cuentos de día o de noche
 • 10 idiomas: Francés, Inglés, Italiano, Español, Portugués, Holandés, Alemán, Árabe, Turco, Polaco
 • Duración ajustable: de 1 a 4 minutos
@@ -155,7 +155,7 @@ Funcionalidades:
 • Histórias geradas por IA, únicas a cada vez
 • Narração com voz natural (feminina ou masculina)
 • Para todas as idades: dos 2 anos até a fase adulta
-• 8 gêneros: Aventura, Fantasia, Animais, Príncipe / Princesa, Ficção científica, Horror, Policial, Comédia
+• 6 gêneros: Aventura, Fantasia, Animais, Príncipe / Princesa, Ficção científica, Comédia
 • Histórias de dia ou de noite
 • 10 idiomas: Francês, Inglês, Italiano, Espanhol, Português, Holandês, Alemão, Árabe, Turco, Polonês
 • Duração ajustável: de 1 a 4 minutos
@@ -196,7 +196,7 @@ Funzionalità:
 • Storie generate dall'IA, uniche ogni volta
 • Narrazione con voce naturale (femminile o maschile)
 • Adatto a tutte le età: dai 2 anni fino agli adulti
-• 8 generi: Avventura, Fantasy, Animali, Principe / Principessa, Fantascienza, Orrore, Poliziesco, Commedia
+• 6 generi: Avventura, Fantasy, Animali, Principe / Principessa, Fantascienza, Commedia
 • Storie di giorno o di notte
 • 10 lingue: Francese, Inglese, Italiano, Spagnolo, Portoghese, Olandese, Tedesco, Arabo, Turco, Polacco
 • Durata regolabile: da 1 a 4 minuti
@@ -237,7 +237,7 @@ Functies:
 • Door AI gegenereerde verhalen, elke keer uniek
 • Natuurlijke stem (vrouw of man)
 • Voor alle leeftijden: van 2 jaar tot volwassenen
-• 8 genres: Avontuur, Fantasie, Dieren, Prins / Prinses, Sciencefiction, Horror, Detective, Komedie
+• 6 genres: Avontuur, Fantasie, Dieren, Prins / Prinses, Sciencefiction, Komedie
 • Verhalen voor overdag of 's avonds
 • 10 talen: Frans, Engels, Italiaans, Spaans, Portugees, Nederlands, Duits, Arabisch, Turks, Pools
 • Instelbare duur: 1 tot 4 minuten
@@ -278,7 +278,7 @@ Funktionen:
 • Von KI generierte Geschichten, jedes Mal einzigartig
 • Erzählung mit natürlicher Stimme (weiblich oder männlich)
 • Für jedes Alter: von 2 Jahren bis Erwachsene
-• 8 Genres: Abenteuer, Fantasy, Tiere, Prinz / Prinzessin, Science-Fiction, Horror, Krimi, Komödie
+• 6 Genres: Abenteuer, Fantasy, Tiere, Prinz / Prinzessin, Science-Fiction, Komödie
 • Geschichten für Tag oder Nacht
 • 10 Sprachen: Französisch, Englisch, Italienisch, Spanisch, Portugiesisch, Niederländisch, Deutsch, Arabisch, Türkisch, Polnisch
 • Einstellbare Dauer: 1 bis 4 Minuten
@@ -319,7 +319,7 @@ History Voice: قصص AI
 • قصص يولّدها الذكاء الاصطناعي، فريدة في كل مرة
 • رواية بصوت طبيعي (أنثى أو ذكر)
 • لجميع الأعمار: من سن الثانية وحتى البالغين
-• 8 أنواع: مغامرة، خيال، حيوانات، أمير / أميرة، خيال علمي، رعب، بوليسي، كوميديا
+• 6 أنواع: مغامرة، خيال، حيوانات، أمير / أميرة، خيال علمي، كوميديا
 • قصص نهارية أو ليلية
 • 10 لغات: الفرنسية، الإنجليزية، الإيطالية، الإسبانية، البرتغالية، الهولندية، الألمانية، العربية، التركية، البولندية
 • مدة قابلة للتعديل: من دقيقة إلى 4 دقائق
@@ -360,7 +360,7 @@ Yaşı, cinsiyeti, süreyi ve hikaye türünü seçin. Büyülü detaylar ekleyi
 • Yapay zeka tarafından oluşturulan, her seferinde benzersiz hikayeler
 • Doğal sesle anlatım (kadın veya erkek)
 • Her yaş için: 2 yaşından yetişkinliğe kadar
-• 8 tür: Macera, Fantezi, Hayvanlar, Prens / Prenses, Bilim kurgu, Korku, Dedektif, Komedi
+• 6 tür: Macera, Fantezi, Hayvanlar, Prens / Prenses, Bilim kurgu, Komedi
 • Gündüz veya gece hikayeleri
 • 10 dil: Fransızca, İngilizce, İtalyanca, İspanyolca, Portekizce, Hollandaca, Almanca, Arapça, Türkçe, Lehçe
 • Ayarlanabilir süre: 1 ila 4 dakika
@@ -401,7 +401,7 @@ Funkcje:
 • Historie generowane przez AI, za każdym razem inne
 • Narracja naturalnym głosem (kobiecym lub męskim)
 • Dla każdego wieku: od 2 lat po dorosłych
-• 8 gatunków: Przygoda, Fantasy, Zwierzęta, Książę / Księżniczka, Science fiction, Horror, Kryminał, Komedia
+• 6 gatunków: Przygoda, Fantasy, Zwierzęta, Książę / Księżniczka, Science fiction, Komedia
 • Historie na dzień lub na noc
 • 10 języków: francuski, angielski, włoski, hiszpański, portugalski, niderlandzki, niemiecki, arabski, turecki, polski
 • Regulowany czas trwania: od 1 do 4 minut

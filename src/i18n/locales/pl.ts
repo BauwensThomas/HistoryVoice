@@ -75,6 +75,11 @@ export default {
   notif_message_sans_credits: 'Kup kredyty, aby kontynuować swoje bajki!',
   notif_permission_refusee: 'Musisz zezwolić na powiadomienia w ustawieniach telefonu, aby włączyć to przypomnienie.',
 
+  // Wymagana aktualizacja
+  update_required_title: 'Dostępna aktualizacja',
+  update_required_message: 'Dostępna jest nowa wersja History Voice. Zaktualizuj aplikację, aby kontynuować.',
+  update_required_cta: 'Aktualizuj',
+
   // Messages
   msg_histoire_prete: 'Historia jest gotowa!',
   msg_erreur_audio: 'Błąd audio',
@@ -147,6 +152,6 @@ export default {
   langues: ['Francuski', 'Angielski', 'Włoski', 'Hiszpański', 'Portugalski (BR)', 'Niderlandzki', 'Niemiecki', 'Arabski', 'Turecki', 'Polski'],
   durees: ['1 min', '2 min', '3 min', '4 min'],
   moments: ['Historia na dzień', 'Historia na noc'],
-  genres: ['Przygoda', 'Fantasy', 'Zwierzęta', 'Książę / Księżniczka', 'Science fiction', 'Horror', 'Kryminał', 'Komedia'],
+  genres: ['Przygoda', 'Fantasy', 'Zwierzęta', 'Książę / Księżniczka', 'Science fiction', 'Komedia'],
   voix: ['Kobieta', 'Mężczyzna'],
 };

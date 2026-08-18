@@ -46,43 +46,43 @@ const SEXE_MAP: Record<string, { boy: string; girl: string }> = {
 
 const GENRE_MAP: Record<string, Record<string, string>> = {
   fr: { aventure: 'aventure', fantastique: 'fantastique', animaux: 'animaux', prince: 'prince / princesse',
-    scifi: 'science fiction', horreur: 'horreur', policier: 'policier', comedie: 'comédie'
+    scifi: 'science fiction', comedie: 'comédie'
   },
   en: {
     aventure: 'adventure', fantastique: 'fantasy', animaux: 'animals', prince: 'prince / princess',
-    scifi: 'science fiction', horreur: 'horror', policier: 'detective', comedie: 'comedy'
+    scifi: 'science fiction', comedie: 'comedy'
   },
   it: {
     aventure: 'avventura', fantastique: 'fantasy', animaux: 'animali', prince: 'principe / principessa',
-    scifi: 'fantascienza', horreur: 'orrore', policier: 'poliziesco', comedie: 'commedia'
+    scifi: 'fantascienza', comedie: 'commedia'
   },
   es: {
     aventure: 'aventura', fantastique: 'fantasía', animaux: 'animales', prince: 'príncipe / princesa',
-    scifi: 'ciencia ficción', horreur: 'terror', policier: 'policíaco', comedie: 'comedia'
+    scifi: 'ciencia ficción', comedie: 'comedia'
   },
   pt: {
     aventure: 'aventura', fantastique: 'fantasia', animaux: 'animais', prince: 'príncipe / princesa',
-    scifi: 'ficção científica', horreur: 'horror', policier: 'policial', comedie: 'comédia'
+    scifi: 'ficção científica', comedie: 'comédia'
   },
   nl: {
     aventure: 'avontuur', fantastique: 'fantasie', animaux: 'dieren', prince: 'prins / prinses',
-    scifi: 'sciencefiction', horreur: 'horror', policier: 'detective', comedie: 'komedie'
+    scifi: 'sciencefiction', comedie: 'komedie'
   },
   de: {
     aventure: 'Abenteuer', fantastique: 'Fantasy', animaux: 'Tiere', prince: 'Prinz / Prinzessin',
-    scifi: 'Science-Fiction', horreur: 'Horror', policier: 'Krimi', comedie: 'Komödie'
+    scifi: 'Science-Fiction', comedie: 'Komödie'
   },
   ar: {
     aventure: 'مغامرة', fantastique: 'خيال', animaux: 'حيوانات', prince: 'أمير / أميرة',
-    scifi: 'خيال علمي', horreur: 'رعب', policier: 'بوليسي', comedie: 'كوميديا'
+    scifi: 'خيال علمي', comedie: 'كوميديا'
   },
   tr: {
     aventure: 'macera', fantastique: 'fantezi', animaux: 'hayvanlar', prince: 'prens / prenses',
-    scifi: 'bilim kurgu', horreur: 'korku', policier: 'dedektif', comedie: 'komedi'
+    scifi: 'bilim kurgu', comedie: 'komedi'
   },
   pl: {
     aventure: 'przygoda', fantastique: 'fantasy', animaux: 'zwierzęta', prince: 'książę / księżniczka',
-    scifi: 'science fiction', horreur: 'horror', policier: 'kryminał', comedie: 'komedia'
+    scifi: 'science fiction', comedie: 'komedia'
   },
 };
 
@@ -117,8 +117,6 @@ function normalizeGenre(genre: string): string {
   if (['animaux', 'animals', 'animali', 'animales', 'animais', 'dieren', 'tiere', 'hayvanlar', 'zwierzęta', 'حيوانات'].some(v => g.includes(v))) return 'animaux';
   if (['prince', 'príncipe', 'prins', 'prinz', 'prens', 'książę', 'أمير'].some(v => g.includes(v))) return 'prince';
   if (['science fiction', 'scifi', 'sci-fi', 'fantascienza', 'ciencia ficción', 'ficção científica', 'sciencefiction', 'science-fiction', 'bilim kurgu', 'خيال علمي'].some(v => g.includes(v))) return 'scifi';
-  if (['horreur', 'horror', 'orrore', 'terror', 'korku', 'رعب'].some(v => g.includes(v))) return 'horreur';
-  if (['policier', 'detective', 'poliziesco', 'policíaco', 'policial', 'krimi', 'dedektif', 'kryminał', 'بوليسي'].some(v => g.includes(v))) return 'policier';
   if (['comédie', 'comedy', 'commedia', 'comedia', 'komedie', 'komödie', 'komedi', 'komedia', 'كوميديا'].some(v => g.includes(v))) return 'comedie';
   return 'aventure';
 }

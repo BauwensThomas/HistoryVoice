@@ -75,6 +75,11 @@ export default {
   notif_message_sans_credits: 'Hikayelerinize devam etmek için kredi satın alın!',
   notif_permission_refusee: 'Bu hatırlatıcıyı etkinleştirmek için telefon ayarlarınızdan bildirimlere izin vermeniz gerekir.',
 
+  // Zorunlu güncelleme
+  update_required_title: 'Güncelleme mevcut',
+  update_required_message: 'History Voice\'in yeni bir sürümü mevcut. Devam etmek için lütfen uygulamayı güncelleyin.',
+  update_required_cta: 'Güncelle',
+
   // Messages
   msg_histoire_prete: 'Hikaye hazır!',
   msg_erreur_audio: 'Ses hatası',
@@ -147,6 +152,6 @@ export default {
   langues: ['Fransızca', 'İngilizce', 'İtalyanca', 'İspanyolca', 'Portekizce (BR)', 'Hollandaca', 'Almanca', 'Arapça', 'Türkçe', 'Lehçe'],
   durees: ['1 dak', '2 dak', '3 dak', '4 dak'],
   moments: ['Gündüz hikayesi', 'Gece hikayesi'],
-  genres: ['Macera', 'Fantezi', 'Hayvanlar', 'Prens / Prenses', 'Bilim kurgu', 'Korku', 'Dedektif', 'Komedi'],
+  genres: ['Macera', 'Fantezi', 'Hayvanlar', 'Prens / Prenses', 'Bilim kurgu', 'Komedi'],
   voix: ['Kadın', 'Erkek'],
 };
