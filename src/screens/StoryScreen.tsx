@@ -21,6 +21,7 @@ import type { RootStackParamList } from '../navigation/AppNavigator';
 import { onReviewResponse } from '../services/reviewService';
 import { chargerStatutPremium } from '../services/supabaseService';
 import { sauvegarderHistoire } from '../services/storyLibraryService';
+import { reportError } from '../services/errorReportService';
 import AdBanner from '../components/AdBanner';
 
 type StoryScreenProps = {
@@ -51,6 +52,7 @@ export default function StoryScreen({ navigation, route }: StoryScreenProps) {
       })
       .catch(err => {
         console.error('Erreur téléchargement audio bibliothèque:', err);
+        reportError('bibliotheque-telechargement', err);
         setDownloadingAudio(false);
         Alert.alert(t('msg_erreur_audio'));
       });
@@ -105,6 +107,7 @@ export default function StoryScreen({ navigation, route }: StoryScreenProps) {
       }
     } catch (error) {
       console.error('Erreur sauvegarde histoire:', error);
+      reportError('bibliotheque-sauvegarde', error);
       Alert.alert(t('msg_erreur_generale'));
     } finally {
       setSaving(false);
@@ -174,7 +177,10 @@ export default function StoryScreen({ navigation, route }: StoryScreenProps) {
           clearInterval(progressInterval.current);
           progressInterval.current = null;
         }
-        if (!success) Alert.alert(t('msg_erreur_audio'));
+        if (!success) {
+          reportError('lecture', 'lecture audio interrompue (play a renvoyé success=false)');
+          Alert.alert(t('msg_erreur_audio'));
+        }
       });
       setIsPlaying(true);
       startProgressTracking(soundRef.current);
@@ -183,6 +189,7 @@ export default function StoryScreen({ navigation, route }: StoryScreenProps) {
       const newSound = new Sound(resolvedAudioPath, '', error => {
         if (error) {
           console.error('Erreur chargement audio:', error);
+          reportError('lecture', error);
           Alert.alert(t('msg_erreur_audio'));
           return;
         }
@@ -195,7 +202,10 @@ export default function StoryScreen({ navigation, route }: StoryScreenProps) {
             clearInterval(progressInterval.current);
             progressInterval.current = null;
           }
-          if (!success) Alert.alert(t('msg_erreur_audio'));
+          if (!success) {
+            reportError('lecture', 'lecture audio interrompue (play a renvoyé success=false)');
+            Alert.alert(t('msg_erreur_audio'));
+          }
         });
         setIsPlaying(true);
         startProgressTracking(newSound);

@@ -11,7 +11,7 @@ import AppNavigator from './src/navigation/AppNavigator';
 import UpdateRequiredScreen from './src/screens/UpdateRequiredScreen';
 import { GoogleSignin } from '@react-native-google-signin/google-signin';
 import { loadCalibration } from './src/services/calibrationStore';
-import { isUpdateRequired } from './src/services/versionCheckService';
+import { forcePlayStoreUpdate, isUpdateRequired } from './src/services/versionCheckService';
 import Purchases from 'react-native-purchases';
 import mobileAds, { AdsConsent, MaxAdContentRating } from 'react-native-google-mobile-ads';
 
@@ -42,7 +42,11 @@ function App() {
   const [updateRequired, setUpdateRequired] = useState(false);
 
   useEffect(() => {
-    isUpdateRequired().then(required => {
+    // 1. Google Play : une version plus récente existe → mise à jour immédiate obligatoire.
+    // 2. Filet de secours : seuil minimal configurable côté serveur (check-app-version).
+    forcePlayStoreUpdate()
+      .then(playUpdatePending => playUpdatePending || isUpdateRequired())
+      .then(required => {
       if (required) {
         setUpdateRequired(true);
         return;

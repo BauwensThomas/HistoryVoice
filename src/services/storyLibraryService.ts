@@ -2,6 +2,7 @@
 // Même pattern que supabaseService.ts : supabase.functions.invoke()
 import { supabase } from '../lib/supabaseClient';
 import { FunctionsHttpError } from '@supabase/supabase-js';
+import { reportError } from './errorReportService';
 
 async function getErrorBody(error: any): Promise<any> {
   if (error instanceof FunctionsHttpError) {
@@ -61,6 +62,9 @@ export async function sauvegarderHistoire(
     if (error) {
       const body = await getErrorBody(error);
       console.error('[Supabase] sauvegarderHistoire error:', body);
+      if (body?.error !== 'limit_reached') {
+        reportError('bibliotheque-sauvegarde', body?.error ?? error);
+      }
       return {
         success: false,
         limitReached: body?.error === 'limit_reached',
@@ -72,6 +76,7 @@ export async function sauvegarderHistoire(
     return { success: true, id: data.id };
   } catch (error) {
     console.error('Erreur sauvegarderHistoire:', error);
+    reportError('bibliotheque-sauvegarde', error);
     return { success: false, limitReached: false };
   }
 }
@@ -84,13 +89,16 @@ export async function listerHistoires(): Promise<SavedStory[]> {
     const { data, error } = await supabase.functions.invoke('list-stories');
 
     if (error) {
-      console.error('[Supabase] listerHistoires error:', await getErrorBody(error));
+      const body = await getErrorBody(error);
+      console.error('[Supabase] listerHistoires error:', body);
+      reportError('bibliotheque-liste', body?.error ?? error);
       return [];
     }
 
     return data?.stories ?? [];
   } catch (error) {
     console.error('Erreur listerHistoires:', error);
+    reportError('bibliotheque-liste', error);
     return [];
   }
 }
@@ -105,13 +113,16 @@ export async function supprimerHistoire(id: number): Promise<boolean> {
     });
 
     if (error) {
-      console.error('[Supabase] supprimerHistoire error:', await getErrorBody(error));
+      const body = await getErrorBody(error);
+      console.error('[Supabase] supprimerHistoire error:', body);
+      reportError('bibliotheque-suppression', body?.error ?? error);
       return false;
     }
 
     return true;
   } catch (error) {
     console.error('Erreur supprimerHistoire:', error);
+    reportError('bibliotheque-suppression', error);
     return false;
   }
 }

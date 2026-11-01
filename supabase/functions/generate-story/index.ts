@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { verifySupabaseToken } from "../_shared/supabase-auth.ts";
+import { checkUsageAllowed } from "../_shared/usage-guard.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -25,28 +26,6 @@ async function callProvider(
   apiKey: string,
   prompt: string
 ): Promise<{ texte: string; tokens: number }> {
-  if (provider === "cerebras") {
-    const res = await fetchWithTimeout("https://api.cerebras.ai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
-      },
-      body: JSON.stringify({
-        model: "gpt-oss-120b",
-        max_tokens: 4096,
-        temperature: 0.9,
-        messages: [{ role: "user", content: prompt }],
-      }),
-    });
-    if (!res.ok) throw new Error(`Cerebras ${res.status}: ${await res.text()}`);
-    const data = await res.json();
-    return {
-      texte: data.choices?.[0]?.message?.content ?? "",
-      tokens: data.usage?.total_tokens ?? 0,
-    };
-  }
-
   if (provider === "groq") {
     const res = await fetchWithTimeout("https://api.groq.com/openai/v1/chat/completions", {
       method: "POST",
@@ -55,7 +34,7 @@ async function callProvider(
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: "llama-3.1-8b-instant",
+        model: "openai/gpt-oss-20b",
         max_tokens: 4096,
         temperature: 0.9,
         messages: [{ role: "user", content: prompt }],
@@ -71,7 +50,7 @@ async function callProvider(
 
   if (provider === "gemini") {
     const res = await fetchWithTimeout(
-      `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${apiKey}`,
+      `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -90,6 +69,37 @@ async function callProvider(
   }
 
   throw new Error(`Provider inconnu: ${provider}`);
+}
+
+const ALERT_TO = "historyVoice@belgacai.com";
+const ALERT_COOLDOWN_MS = 10 * 60 * 1000;
+const lastAlertByUid = new Map<string, number>();
+
+// Prévient par mail quand TOUS les providers IA échouent (une alerte max / 10 min / utilisateur,
+// car le client réessaie jusqu'à 5 fois d'affilée).
+async function alertAllProvidersFailed(uid: string, errors: string[]): Promise<void> {
+  const now = Date.now();
+  if (now - (lastAlertByUid.get(uid) ?? 0) < ALERT_COOLDOWN_MS) return;
+  lastAlertByUid.set(uid, now);
+  try {
+    const escape = (s: string) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;");
+    await fetch("https://api.resend.com/emails", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${Deno.env.get("RESEND_API_KEY")}`,
+      },
+      body: JSON.stringify({
+        from: "HistoryVoice Alertes <historyvoice@belgacai.com>",
+        to: [ALERT_TO],
+        subject: "HistoryVoice — Échec génération d'histoire (tous les providers IA)",
+        html: `<p>Utilisateur : ${escape(uid)}<br>Date : ${new Date().toISOString()}</p>
+<pre style="white-space:pre-wrap">${errors.map(escape).join("\n\n")}</pre>`,
+      }),
+    });
+  } catch (e) {
+    console.error("[generate-story] Alerte mail impossible:", (e as Error).message);
+  }
 }
 
 serve(async (req) => {
@@ -128,15 +138,18 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // Récupérer tous les providers 'ecrit' triés par ordre de priorité
-    const { data: iaList, error: iaError } = await supabase
-      .from("ia")
-      .select("api_key, provider")
-      .eq("type", "ecrit")
-      .order("ordre", { ascending: true });
+    const refusal = await checkUsageAllowed(supabase, uid, "story");
+    if (refusal) return refusal;
 
-    if (iaError || !iaList?.length) {
-      console.error("[generate-story] Erreur lecture clés IA:", iaError);
+    // Providers par ordre de priorité, clés lues depuis les secrets de la fonction
+    // (jamais stockées en base : elles se retrouveraient dans les sauvegardes).
+    const iaList: { provider: string; api_key: string }[] = [
+      { provider: "groq", api_key: Deno.env.get("GROQ_API_KEY") ?? "" },
+      { provider: "gemini", api_key: Deno.env.get("GEMINI_API_KEY") ?? "" },
+    ].filter((p) => p.api_key);
+
+    if (!iaList.length) {
+      console.error("[generate-story] Aucun secret GROQ_API_KEY / GEMINI_API_KEY défini");
       return new Response(
         JSON.stringify({ error: "Impossible de récupérer les clés API" }),
         {
@@ -150,6 +163,7 @@ serve(async (req) => {
     let texte = "";
     let tokens = 0;
     let lastError = "";
+    const providerErrors: string[] = [];
 
     for (const ia of iaList) {
       try {
@@ -157,6 +171,7 @@ serve(async (req) => {
         const result = await callProvider(ia.provider, ia.api_key, prompt);
         if (!result.texte) {
           lastError = `${ia.provider} a renvoyé une réponse vide`;
+          providerErrors.push(lastError);
           console.warn(`[generate-story] Échec ${ia.provider}: ${lastError}`);
           continue; // Réponse 200 mais vide (ex: filtrage de contenu) : essayer le provider suivant
         }
@@ -166,14 +181,16 @@ serve(async (req) => {
         break;
       } catch (err) {
         lastError = (err as Error).message;
+        providerErrors.push(lastError);
         console.warn(`[generate-story] Échec ${ia.provider}: ${lastError}`);
         // Continuer avec le prochain provider
       }
     }
 
     if (!texte) {
+      await alertAllProvidersFailed(uid, providerErrors);
       return new Response(
-        JSON.stringify({ error: "Tous les providers IA ont échoué", details: lastError }),
+        JSON.stringify({ error: "Tous les providers IA ont échoué", details: providerErrors.join(" | ").slice(0, 800) || lastError }),
         {
           status: 503,
           headers: { ...corsHeaders, "Content-Type": "application/json" },

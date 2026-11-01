@@ -1,6 +1,7 @@
 import { serve } from "https://deno.land/std@0.168.0/http/server.ts";
 import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 import { verifySupabaseToken } from "../_shared/supabase-auth.ts";
+import { checkUsageAllowed } from "../_shared/usage-guard.ts";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -76,15 +77,15 @@ serve(async (req) => {
       Deno.env.get("SUPABASE_SERVICE_ROLE_KEY")!
     );
 
-    // Lire la clé Google TTS depuis la table ia
-    const { data: iaData, error: iaError } = await supabase
-      .from("ia")
-      .select("api_key")
-      .eq("type", "parle")
-      .single();
+    const refusal = await checkUsageAllowed(supabase, uid, "audio");
+    if (refusal) return refusal;
 
-    if (iaError || !iaData?.api_key) {
-      console.error("Erreur lecture clé TTS:", iaError);
+    // Clé Google TTS lue depuis les secrets de la fonction (jamais stockée en base :
+    // elle se retrouverait dans les sauvegardes).
+    const iaData = { api_key: Deno.env.get("GOOGLE_TTS_API_KEY") ?? "" };
+
+    if (!iaData.api_key) {
+      console.error("Secret GOOGLE_TTS_API_KEY non défini");
       return new Response(
         JSON.stringify({ error: "Impossible de récupérer la clé TTS" }),
         {

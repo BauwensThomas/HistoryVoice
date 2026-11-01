@@ -22,6 +22,7 @@ import LibraryIcon from '../components/icons/LibraryIcon';
 import LogoutIcon from '../components/icons/LogoutIcon';
 import { genererHistoireAvecRetry } from '../services/groqService';
 import { genererAudio } from '../services/ttsService';
+import { reportError } from '../services/errorReportService';
 import {
   chargerCredits,
   chargerStatutPremium,
@@ -335,6 +336,7 @@ export default function MainScreen({ navigation }: MainScreenProps) {
       console.error(`Erreur génération [${etape}]:`, error);
       setLoading(false);
       const details = error.message || t('msg_erreur_generale');
+      reportError(etape, details);
       Alert.alert(t('msg_erreur_audio'), `[${etape}] ${details}`);
     }
   };

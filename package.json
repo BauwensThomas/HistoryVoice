@@ -1,6 +1,6 @@
 {
   "name": "HistoryVoice",
-  "version": "2.5.0",
+  "version": "2.5.1",
   "private": true,
   "scripts": {
     "android": "react-native run-android",
@@ -30,7 +30,8 @@
     "react-native-screens": "^4.23.0",
     "react-native-sound": "^0.13.0",
     "react-native-svg": "^15.15.5",
-    "react-native-url-polyfill": "^3.0.0"
+    "react-native-url-polyfill": "^3.0.0",
+    "sp-react-native-in-app-updates": "^2.0.0"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",
