@@ -1,7 +1,6 @@
 // Vérifie si une mise à jour obligatoire est disponible, via la fonction
 // check-app-version (aucune auth requise, appelable avant connexion).
 import { Platform } from 'react-native';
-import SpInAppUpdates, { IAUUpdateKind } from 'sp-react-native-in-app-updates';
 import { supabase } from '../lib/supabaseClient';
 import { version as currentVersion } from '../../package.json';
 
@@ -29,6 +28,9 @@ function isOutdated(current: string, minimum: string): boolean {
 export async function forcePlayStoreUpdate(): Promise<boolean> {
   if (Platform.OS !== 'android') return false;
   try {
+    // Chargé ici et non en tête de fichier : si le module natif était absent, l'erreur
+    // doit être rattrapée ci-dessous au lieu de faire planter l'app au démarrage.
+    const { default: SpInAppUpdates, IAUUpdateKind } = require('sp-react-native-in-app-updates');
     const inAppUpdates = new SpInAppUpdates(false);
     // Play ne signale AVAILABLE que si une version plus récente existe pour cet appareil.
     const result = await inAppUpdates.checkNeedsUpdate({
