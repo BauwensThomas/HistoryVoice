@@ -116,6 +116,21 @@ La version se règle dans `android/app/build.gradle` (`versionCode`, `versionNam
 
 La fonction `check-app-version` renvoie la version minimale autorisée. Pour forcer une mise à jour, modifier `MIN_VERSION_ANDROID` puis la redéployer, **uniquement après** que la nouvelle version est réellement disponible sur le Play Store.
 
+### Mise à jour automatique Google Play
+
+Au lancement, `forcePlayStoreUpdate` (`src/services/versionCheckService.ts`) demande à Google Play s'il existe une version plus récente pour l'appareil. Si oui, la mise à jour immédiate de Google s'affiche ; en cas de refus, l'écran bloquant prend le relais. Elle repose sur la librairie `sp-react-native-in-app-updates` et ne se déclenche que pour une app installée depuis le Play Store.
+
+Cette librairie importe `react-native-device-info`, dont le module natif n'est **pas** lié à l'app (dépendance indirecte, non autolinkée) : l'importer ferait planter l'app au démarrage. `metro.config.js` le remplace donc par `src/stubs/deviceInfoStub.js`, qui renvoie simplement la version de `package.json`. Ne pas retirer ce remplacement.
+
+### Points d'attention pour le build et la publication
+
+- **Plugin Kotlin** : `android/build.gradle` fixe `kotlin-gradle-plugin:2.3.0`. Nécessaire, car le SDK Google Ads est compilé avec les métadonnées Kotlin 2.3 ; sans cela, la librairie des publicités ne compile pas.
+- **Copie `C:\HV`** : ne pas exclure les dossiers nommés `web` dans robocopy (cela retirerait `node_modules/react-native-device-info/src/web`), et ne pas écrire de BOM dans les fichiers `.gradle`.
+- **Code de version** : chaque envoi sur la Play Console exige un `versionCode` jamais utilisé, tous canaux confondus.
+- **Tester avant la production** : toute nouvelle librairie native se teste d'abord sur les Tests internes (ou en installant l'APK de release avec `adb install`). Un plantage au démarrage sur le Play Store est refusé par Google (règle « fonctionnalités défectueuses »).
+- **Artefacts actifs** : un ancien AAB resté dans un canal (Tests internes, Tests fermés – Alpha), même suspendu, compte pour certaines vérifications de la Play Console (par exemple la permission `AD_ID`). Envoyer le nouvel AAB dans ces canaux aussi.
+- **Envoi en examen** : les changements restent en brouillon tant que « Envoyer N modifications pour examen » n'est pas cliqué sur la Vue d'ensemble de la publication.
+
 ## Structure du projet
 
 ```
@@ -124,6 +139,7 @@ src/
   services/     Accès Supabase, IA, voix, notifications, avis, version, rapports d'erreur
   components/   Composants partagés (publicité, modales, icônes, fond animé...)
   config/       Voix TTS, publicités, configuration générale
+  stubs/        Modules JavaScript de remplacement (voir « Mise à jour automatique Google Play »)
   i18n/         Traductions (10 langues)
   utils/        Construction du prompt, calcul du nombre de mots
 supabase/

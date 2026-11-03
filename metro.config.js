@@ -1,3 +1,4 @@
+const path = require('path');
 const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 
 /**
@@ -9,6 +10,17 @@ const { getDefaultConfig, mergeConfig } = require('@react-native/metro-config');
 const config = {
   resolver: {
     blockList: [/android\/app\/\.cxx\/.*/, /android\/app\/build\/.*/, /android\/\.gradle\/.*/],
+    // react-native-device-info n'est pas lié à l'app (dépendance indirecte de la librairie de
+    // mise à jour Google Play) : on le remplace par un module JS minimal.
+    resolveRequest: (context, moduleName, platform) => {
+      if (moduleName === 'react-native-device-info') {
+        return {
+          type: 'sourceFile',
+          filePath: path.resolve(__dirname, 'src/stubs/deviceInfoStub.js'),
+        };
+      }
+      return context.resolveRequest(context, moduleName, platform);
+    },
   },
 };
 

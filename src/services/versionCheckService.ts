@@ -34,6 +34,7 @@ export async function forcePlayStoreUpdate(): Promise<boolean> {
     const inAppUpdates = new SpInAppUpdates(false);
     // Play ne signale AVAILABLE que si une version plus récente existe pour cet appareil.
     const result = await inAppUpdates.checkNeedsUpdate({
+      curVersion: currentVersion,
       customVersionComparator: () => 1,
     });
     if (!result.shouldUpdate) return false;
