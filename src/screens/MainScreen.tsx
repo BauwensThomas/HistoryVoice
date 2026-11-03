@@ -336,7 +336,7 @@ export default function MainScreen({ navigation }: MainScreenProps) {
       console.error(`Erreur génération [${etape}]:`, error);
       setLoading(false);
       const details = error.message || t('msg_erreur_generale');
-      reportError(etape, details);
+      reportError(etape, error, { 'Message affiché': details });
       Alert.alert(t('msg_erreur_audio'), `[${etape}] ${details}`);
     }
   };

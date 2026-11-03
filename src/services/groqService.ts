@@ -21,13 +21,20 @@ export async function genererHistoireAvecIA(prompt: string): Promise<GroqRespons
     // error.message de supabase-js est générique ("Edge Function returned a non-2xx status code")
     // le détail utile (ex: "Tous les providers IA ont échoué") est dans le corps de la réponse HTTP.
     let details = '';
+    let raw = '';
+    const ctx = (error as any).context;
     try {
-      const body = await (error as any).context?.json();
+      raw = await ctx.text();
+      const body = JSON.parse(raw);
       details = body?.details || body?.error || '';
     } catch {
-      // corps non-JSON ou déjà consommé, on garde le message générique
+      // corps non-JSON ou illisible, on garde le message générique
     }
-    throw new Error(details || error.message || 'API Error');
+    const failure: any = new Error(details || error.message || 'API Error');
+    // Pour le rapport d'erreur envoyé par mail (code HTTP + réponse brute du serveur).
+    failure.httpStatus = ctx?.status;
+    failure.rawBody = raw.slice(0, 500);
+    throw failure;
   }
 
   return {

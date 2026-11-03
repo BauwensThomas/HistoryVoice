@@ -4,15 +4,40 @@ import { supabase } from '../lib/supabaseClient';
 import { FunctionsHttpError } from '@supabase/supabase-js';
 import { reportError } from './errorReportService';
 
+// Lit la réponse d'erreur d'une Edge Function. Ne se fie pas à `instanceof` (qui peut échouer si
+// la classe d'erreur est dupliquée) : on regarde simplement si l'erreur porte une réponse HTTP.
+// `_status` et `_raw` servent au rapport d'erreur (le corps ne peut être lu qu'une fois).
 async function getErrorBody(error: any): Promise<any> {
-  if (error instanceof FunctionsHttpError) {
+  const ctx = error?.context;
+  if (error instanceof FunctionsHttpError || (ctx && typeof ctx.text === 'function')) {
+    let raw = '';
     try {
-      return await error.context.json();
+      raw = await ctx.text();
     } catch {
-      return { error: error.message };
+      // corps illisible
     }
+    let json: any;
+    try {
+      json = JSON.parse(raw);
+    } catch {
+      // réponse non JSON (erreur de la plateforme par exemple)
+    }
+    return {
+      ...(json ?? {}),
+      error: json?.error ?? (raw || error?.message || String(error)),
+      _status: ctx?.status,
+      _raw: raw.slice(0, 500),
+    };
   }
   return { error: error?.message || String(error) };
+}
+
+// Erreur lisible par reportError : code HTTP + texte de la réponse du serveur.
+function toReportable(body: any, error: unknown): Error {
+  const reportable: any = new Error(String(body?.error ?? (error as any)?.message ?? 'erreur'));
+  reportable.httpStatus = body?._status;
+  reportable.rawBody = body?._raw;
+  return reportable;
 }
 
 export interface SaveStoryParams {
@@ -63,7 +88,11 @@ export async function sauvegarderHistoire(
       const body = await getErrorBody(error);
       console.error('[Supabase] sauvegarderHistoire error:', body);
       if (body?.error !== 'limit_reached') {
-        reportError('bibliotheque-sauvegarde', body?.error ?? error);
+        reportError('bibliotheque-sauvegarde', toReportable(body, error), {
+          'Taille audio (base64)': params.audioBase64.length,
+          'Taille texte': params.texte.length,
+          'Durée (s)': params.dureeSecondes,
+        });
       }
       return {
         success: false,
@@ -76,7 +105,11 @@ export async function sauvegarderHistoire(
     return { success: true, id: data.id };
   } catch (error) {
     console.error('Erreur sauvegarderHistoire:', error);
-    reportError('bibliotheque-sauvegarde', error);
+    reportError('bibliotheque-sauvegarde', error, {
+      'Taille audio (base64)': params.audioBase64.length,
+      'Taille texte': params.texte.length,
+      'Durée (s)': params.dureeSecondes,
+    });
     return { success: false, limitReached: false };
   }
 }
@@ -91,7 +124,7 @@ export async function listerHistoires(): Promise<SavedStory[]> {
     if (error) {
       const body = await getErrorBody(error);
       console.error('[Supabase] listerHistoires error:', body);
-      reportError('bibliotheque-liste', body?.error ?? error);
+      reportError('bibliotheque-liste', toReportable(body, error));
       return [];
     }
 
@@ -115,7 +148,7 @@ export async function supprimerHistoire(id: number): Promise<boolean> {
     if (error) {
       const body = await getErrorBody(error);
       console.error('[Supabase] supprimerHistoire error:', body);
-      reportError('bibliotheque-suppression', body?.error ?? error);
+      reportError('bibliotheque-suppression', toReportable(body, error));
       return false;
     }
 
