@@ -15,7 +15,7 @@ const corsHeaders = {
 // utilisateurs actuels se retrouvent bloqués avec un bouton "Mettre à
 // jour" qui pointe vers une version qui n'existe pas encore côté Store.
 // Ne remonter ce numéro qu'une fois la nouvelle version confirmée live.
-const MIN_VERSION_ANDROID = "2.2.1";
+const MIN_VERSION_ANDROID = "2.5.3";
 
 serve((req) => {
   if (req.method === "OPTIONS") {
