@@ -10,13 +10,43 @@ const corsHeaders = {
 };
 
 // Empêche un provider lent/bloqué de faire dépasser le temps d'exécution max de la fonction Edge.
-async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs = 15000): Promise<Response> {
+async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs = 20000): Promise<Response> {
   const controller = new AbortController();
   const timer = setTimeout(() => controller.abort(), timeoutMs);
   try {
     return await fetch(url, { ...options, signal: controller.signal });
+  } catch (err) {
+    if ((err as Error).name === "AbortError") {
+      throw new Error(`délai dépassé (${Math.round(timeoutMs / 1000)} s)`);
+    }
+    throw err;
   } finally {
     clearTimeout(timer);
+  }
+}
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+// Appelle un provider ; réessaie UNE fois sur une limite de débit (429) ou une surcharge (503).
+// Groq indique le délai à attendre ("Please try again in 1.92s") : on le respecte (5 s max).
+async function postWithRetry(
+  label: string,
+  url: string,
+  options: RequestInit,
+  timeoutMs: number
+): Promise<Response> {
+  for (let attempt = 1; ; attempt++) {
+    const res = await fetchWithTimeout(url, options, timeoutMs);
+    if (res.ok) return res;
+    const body = await res.text();
+    if ((res.status === 429 || res.status === 503) && attempt === 1) {
+      const hinted = /try again in ([0-9.]+)s/i.exec(body)?.[1];
+      const waitMs = Math.min(5000, hinted ? Math.ceil(Number(hinted) * 1000) + 500 : 2000);
+      console.warn(`[generate-story] ${label} ${res.status}, nouvel essai dans ${waitMs} ms`);
+      await sleep(waitMs);
+      continue;
+    }
+    throw new Error(`${label} ${res.status}: ${body}`);
   }
 }
 
@@ -24,32 +54,47 @@ async function fetchWithTimeout(url: string, options: RequestInit, timeoutMs = 1
 async function callProvider(
   provider: string,
   apiKey: string,
-  prompt: string
+  prompt: string,
+  model?: string
 ): Promise<{ texte: string; tokens: number }> {
   if (provider === "groq") {
-    const res = await fetchWithTimeout("https://api.groq.com/openai/v1/chat/completions", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+    const groqModel = model ?? "openai/gpt-oss-20b";
+    const res = await postWithRetry(
+      `Groq(${groqModel})`,
+      "https://api.groq.com/openai/v1/chat/completions",
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${apiKey}`,
+        },
+        body: JSON.stringify({
+          model: groqModel,
+          max_tokens: 3500,
+          temperature: 0.9,
+          // Modèles à raisonnement : sans cela, la réflexion peut consommer tout le budget de
+          // tokens et laisser une réponse vide.
+          reasoning_effort: "low",
+          include_reasoning: false,
+          messages: [{ role: "user", content: prompt }],
+        }),
       },
-      body: JSON.stringify({
-        model: "openai/gpt-oss-20b",
-        max_tokens: 4096,
-        temperature: 0.9,
-        messages: [{ role: "user", content: prompt }],
-      }),
-    });
-    if (!res.ok) throw new Error(`Groq ${res.status}: ${await res.text()}`);
+      20000
+    );
     const data = await res.json();
-    return {
-      texte: data.choices?.[0]?.message?.content ?? "",
-      tokens: data.usage?.total_tokens ?? 0,
-    };
+    const choice = data.choices?.[0];
+    const texte = choice?.message?.content ?? "";
+    if (!texte) {
+      throw new Error(
+        `Groq(${groqModel}) a renvoyé une réponse vide (finish_reason=${choice?.finish_reason ?? "?"})`
+      );
+    }
+    return { texte, tokens: data.usage?.total_tokens ?? 0 };
   }
 
   if (provider === "gemini") {
-    const res = await fetchWithTimeout(
+    const res = await postWithRetry(
+      "Gemini",
       `https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent?key=${apiKey}`,
       {
         method: "POST",
@@ -58,14 +103,16 @@ async function callProvider(
           contents: [{ role: "user", parts: [{ text: prompt }] }],
           generationConfig: { maxOutputTokens: 4096, temperature: 0.9 },
         }),
-      }
+      },
+      40000
     );
-    if (!res.ok) throw new Error(`Gemini ${res.status}: ${await res.text()}`);
     const data = await res.json();
-    return {
-      texte: data.candidates?.[0]?.content?.parts?.[0]?.text ?? "",
-      tokens: data.usageMetadata?.totalTokenCount ?? 0,
-    };
+    const candidate = data.candidates?.[0];
+    const texte = candidate?.content?.parts?.[0]?.text ?? "";
+    if (!texte) {
+      throw new Error(`Gemini a renvoyé une réponse vide (finishReason=${candidate?.finishReason ?? "?"})`);
+    }
+    return { texte, tokens: data.usageMetadata?.totalTokenCount ?? 0 };
   }
 
   throw new Error(`Provider inconnu: ${provider}`);
@@ -143,8 +190,10 @@ serve(async (req) => {
 
     // Providers par ordre de priorité, clés lues depuis les secrets de la fonction
     // (jamais stockées en base : elles se retrouveraient dans les sauvegardes).
-    const iaList: { provider: string; api_key: string }[] = [
-      { provider: "groq", api_key: Deno.env.get("GROQ_API_KEY") ?? "" },
+    // Groq limite le débit par modèle : le 120b sert de secours au 20b quand celui-ci est saturé.
+    const iaList: { provider: string; api_key: string; model?: string }[] = [
+      { provider: "groq", model: "openai/gpt-oss-20b", api_key: Deno.env.get("GROQ_API_KEY") ?? "" },
+      { provider: "groq", model: "openai/gpt-oss-120b", api_key: Deno.env.get("GROQ_API_KEY") ?? "" },
       { provider: "gemini", api_key: Deno.env.get("GEMINI_API_KEY") ?? "" },
     ].filter((p) => p.api_key);
 
@@ -163,21 +212,18 @@ serve(async (req) => {
     let texte = "";
     let tokens = 0;
     let lastError = "";
+    let usedProvider = "";
     const providerErrors: string[] = [];
 
     for (const ia of iaList) {
       try {
-        console.log(`[generate-story] Essai provider: ${ia.provider}`);
-        const result = await callProvider(ia.provider, ia.api_key, prompt);
-        if (!result.texte) {
-          lastError = `${ia.provider} a renvoyé une réponse vide`;
-          providerErrors.push(lastError);
-          console.warn(`[generate-story] Échec ${ia.provider}: ${lastError}`);
-          continue; // Réponse 200 mais vide (ex: filtrage de contenu) : essayer le provider suivant
-        }
+        console.log(`[generate-story] Essai provider: ${ia.provider} ${ia.model ?? ""}`);
+        // Une réponse vide lève une erreur dans callProvider : on passe alors au suivant.
+        const result = await callProvider(ia.provider, ia.api_key, prompt, ia.model);
         texte = result.texte;
         tokens = result.tokens;
-        console.log(`[generate-story] Succès avec ${ia.provider} (${tokens} tokens)`);
+        usedProvider = `${ia.provider}${ia.model ? ":" + ia.model : ""}`;
+        console.log(`[generate-story] Succès avec ${usedProvider} (${tokens} tokens)`);
         break;
       } catch (err) {
         lastError = (err as Error).message;
@@ -212,7 +258,7 @@ serve(async (req) => {
       await supabase.from("usage_logs").insert({ uid, tokens, tts_chars: 0 });
     }
 
-    return new Response(JSON.stringify({ texte, tokens }), {
+    return new Response(JSON.stringify({ texte, tokens, provider: usedProvider }), {
       headers: { ...corsHeaders, "Content-Type": "application/json" },
     });
   } catch (error) {
