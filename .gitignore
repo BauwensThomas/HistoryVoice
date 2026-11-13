@@ -86,3 +86,6 @@ AGENTS.md
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+
+# Cache local de la CLI Supabase (régénéré automatiquement, propre à chaque machine)
+supabase/.temp/
